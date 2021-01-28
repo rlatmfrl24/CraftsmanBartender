@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Primary -->
+    <color name="orange_100">#ffff81</color>
+    <color name="orange_300">#ffd54f</color>
+    <color name="orange_500">#c8a415</color>
+
+    <!-- Secondary -->
+    <color name="red_200">#ff867c</color>
+    <color name="red_400">#ef5350</color>
+    <color name="red_600">#b61827</color>
+
+    <!-- Default Setting -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
