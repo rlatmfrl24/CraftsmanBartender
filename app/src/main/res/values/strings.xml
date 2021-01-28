@@ -2,4 +2,5 @@
     <string name="app_name">CraftsmanBartender</string>
     <string name="string_main_recipe_btn">Recipes</string>
     <string name="string_main_mock_test_btn">Mock Test</string>
+    <string name="string_recipe_add_content_description">Add Recipes</string>
 </resources>

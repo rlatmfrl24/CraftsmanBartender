@@ -8,18 +8,18 @@ class Constants {
             Build,
             Stir,
             Float,
-            Shake
+            Shake,
+            Shake_Build,
+            Build_Float
         }
         class Converters {
             @TypeConverter
-            fun makingStylesToString(makingStyleList: MutableList<MakingStyle>): String {
-                return makingStyleList.joinToString(separator = "/") { it.name }
+            fun makingStyleToString(makingStyle: MakingStyle): String {
+                return makingStyle.name
             }
             @TypeConverter
-            fun stringToMakingStyles(value: String): MutableList<MakingStyle> {
-                return value.split("/").map {
-                    MakingStyle.valueOf(it)
-                }.toMutableList()
+            fun intToMakingStyles(value: String): MakingStyle {
+                return MakingStyle.valueOf(value)
             }
         }
     }

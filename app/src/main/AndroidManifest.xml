@@ -16,11 +16,14 @@
             android:theme="@style/Theme.CraftsmanBartender.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity
+            android:name=".ui.AddRecipeActivity"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+        <activity android:name=".ui.RecipeActivity" />
     </application>
 
 </manifest>

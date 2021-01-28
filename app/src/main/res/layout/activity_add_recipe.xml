@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.AddRecipeActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:title="Add Recipe"
+                app:titleTextAppearance="@style/Theme.CraftsmanBartender.ToolbarTextAppearance"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/container_recipe_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    app:layout_constraintVertical_chainStyle="spread_inside"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_add_btn">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_recipe_name"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:hintTextColor="@color/orange_500"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_recipe_glass"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:hintTextColor="@color/orange_500"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Glass"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/til_recipe_name">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_recipe_garnish"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:hintTextColor="@color/orange_500"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Garnish"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/til_recipe_glass">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_add_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="ADD"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/spoqa_han_sans_bold"
+                    android:background="@color/orange_300"
+                    android:paddingVertical="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/container_recipe_form"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

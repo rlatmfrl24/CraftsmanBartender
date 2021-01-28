@@ -1,5 +1,6 @@
 package com.soulkey.craftsmanbartender.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.soulkey.craftsmanbartender.R
@@ -16,7 +17,9 @@ class MainActivity : BaseActivity() {
         setTheme(R.style.Theme_CraftsmanBartender)
 
         binding.cardRecipesBtn.setOnClickListener {
-
+            Intent(this, RecipeActivity::class.java).apply {
+                startActivity(this)
+            }
         }
         binding.cardMostTestBtn.setOnClickListener {
 

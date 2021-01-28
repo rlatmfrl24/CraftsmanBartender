@@ -1,5 +1,6 @@
 package com.soulkey.craftsmanbartender.lib.model
 
+import android.os.Parcelable
 import androidx.room.*
 
 data class RecipeWithIngredient(
