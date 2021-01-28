@@ -13,7 +13,13 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_CraftsmanBartender_Launcher)
-        binding.tvHello
+        setTheme(R.style.Theme_CraftsmanBartender)
+
+        binding.cardRecipesBtn.setOnClickListener {
+
+        }
+        binding.cardMostTestBtn.setOnClickListener {
+
+        }
     }
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CraftsmanBartender</string>
+    <string name="string_main_recipe_btn">Recipes</string>
+    <string name="string_main_mock_test_btn">Mock Test</string>
 </resources>

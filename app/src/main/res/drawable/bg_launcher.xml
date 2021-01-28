@@ -2,11 +2,7 @@
 <layer-list
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:opacity="opaque">
-    <item android:drawable="@color/orange_300">
-        <item>
-            <bitmap
-                android:gravity="center"
-                android:src="@drawable/product_logo"/>
-        </item>
-    </item>
+    <item android:drawable="@color/orange_300"/>
+    <item android:drawable="@drawable/product_logo_120"
+        android:gravity="center"/>
 </layer-list>
