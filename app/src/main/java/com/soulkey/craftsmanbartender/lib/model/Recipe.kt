@@ -7,7 +7,7 @@ import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.MakingStyle
 
 @Entity
 data class Recipe(
-    @PrimaryKey val recipeBasicId: Long,
+    @PrimaryKey(autoGenerate = true) val recipeBasicId: Long?,
     @ColumnInfo val name: String,
     @ColumnInfo val primaryMakingStyle: MakingStyle,
     @ColumnInfo val secondaryMakingStyle: MakingStyle?,

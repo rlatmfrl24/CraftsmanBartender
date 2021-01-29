@@ -5,6 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.AddRecipeActivity">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.soulkey.craftsmanbartender.ui.RecipeViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -51,7 +57,8 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.recipeName}"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,7 +74,8 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.recipeGlass}"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,7 +91,8 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.recipeGarnish}"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,6 +109,7 @@
                             android:id="@+id/spinner_primary_making_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            text="@={viewModel.primaryMakingStyle}"
                             android:inputType="none"/>
 
                     </com.google.android.material.textfield.TextInputLayout>

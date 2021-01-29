@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
 data class Ingredient(
     @PrimaryKey(autoGenerate = true) val ingredientId: Long?,
     @ColumnInfo val name: String,
-    @ColumnInfo val amount: Float,
+    @ColumnInfo val amount: Float?,
     @ColumnInfo val unit: String
 )

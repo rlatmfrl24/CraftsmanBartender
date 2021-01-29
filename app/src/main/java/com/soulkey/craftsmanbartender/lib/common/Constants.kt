@@ -16,9 +16,9 @@ class Constants {
             dash,
             tbsp,
             ea,
-            part
+            part,
+            fill
         }
-
 
         class Converters {
             @TypeConverter
