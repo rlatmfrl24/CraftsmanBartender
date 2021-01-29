@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "ingredients")
 data class Ingredient(
-    @PrimaryKey val ingredientId: Long,
+    @PrimaryKey(autoGenerate = true) val ingredientId: Long?,
     @ColumnInfo val name: String,
     @ColumnInfo val amount: Float,
     @ColumnInfo val unit: String

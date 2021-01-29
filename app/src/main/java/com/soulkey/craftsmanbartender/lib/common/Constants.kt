@@ -11,6 +11,15 @@ class Constants {
             Shake,
             Blend
         }
+        enum class IngredientUnit {
+            oz,
+            dash,
+            tbsp,
+            ea,
+            part
+        }
+
+
         class Converters {
             @TypeConverter
             fun makingStyleToString(makingStyle: MakingStyle): String {
