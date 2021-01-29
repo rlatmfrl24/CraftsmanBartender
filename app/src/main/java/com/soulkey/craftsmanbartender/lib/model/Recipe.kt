@@ -9,7 +9,8 @@ import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.MakingStyle
 data class Recipe(
     @PrimaryKey val recipeBasicId: Long,
     @ColumnInfo val name: String,
-    @ColumnInfo val style: MakingStyle,
+    @ColumnInfo val primaryMakingStyle: MakingStyle,
+    @ColumnInfo val secondaryMakingStyle: MakingStyle?,
     @ColumnInfo val glass: String,
-    @ColumnInfo val garnish: String
+    @ColumnInfo val garnish: String?
 )

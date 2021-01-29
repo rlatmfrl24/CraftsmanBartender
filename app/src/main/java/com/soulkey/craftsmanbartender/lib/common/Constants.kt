@@ -9,8 +9,7 @@ class Constants {
             Stir,
             Float,
             Shake,
-            Shake_Build,
-            Build_Float
+            Blend
         }
         class Converters {
             @TypeConverter
