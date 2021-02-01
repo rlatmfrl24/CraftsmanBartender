@@ -52,6 +52,12 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
         }
     }
 
+    fun removeIngredient(ingredient: Ingredient) {
+        ingredients.value = ingredients.value?.filter {
+            it != ingredient
+        }?.toMutableList()
+    }
+
     fun createRecipe() {
         val recipeName = recipeName.value?: return
         val recipeGlass = recipeGlass.value?: return

@@ -13,13 +13,16 @@ import com.soulkey.craftsmanbartender.lib.common.BaseUtil.Companion.makeRequired
 import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.IngredientUnit
 import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.MakingStyle
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
+import com.soulkey.craftsmanbartender.ui.adapter.AddRecipeIngredientListAdapter
 import com.soulkey.craftsmanbartender.ui.adapter.IngredientListAdapter
 import kotlinx.android.synthetic.main.dialog_add_ingredient.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddRecipeActivity : BaseActivity() {
     private val recipeViewModel : RecipeViewModel by viewModel()
-    private val ingredientAdapter = IngredientListAdapter()
+    private val ingredientAdapter: AddRecipeIngredientListAdapter by lazy {
+        AddRecipeIngredientListAdapter(recipeViewModel)
+    }
     private val binding : ActivityAddRecipeBinding by lazy {
         DataBindingUtil.setContentView<ActivityAddRecipeBinding>(this, R.layout.activity_add_recipe)
     }

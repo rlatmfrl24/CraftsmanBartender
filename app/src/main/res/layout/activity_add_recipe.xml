@@ -11,7 +11,7 @@
             type="com.soulkey.craftsmanbartender.ui.recipe.RecipeViewModel" />
         <variable
             name="adapter"
-            type="com.soulkey.craftsmanbartender.ui.adapter.IngredientListAdapter" />
+            type="com.soulkey.craftsmanbartender.ui.adapter.AddRecipeIngredientListAdapter" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -25,7 +25,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:title="Add Recipe"
+                app:title="Add New Recipe"
                 app:titleTextAppearance="@style/Theme.CraftsmanBartender.ToolbarTextAppearance"/>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -154,7 +154,7 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:setAdapter="@{adapter}"
                         app:layout_constraintTop_toBottomOf="@id/tv_header_ingredients"
-                        tools:listitem="@layout/item_ingredient_list"/>
+                        tools:listitem="@layout/item_add_recipe_ingredient_list"/>
                     
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/container_add_ingredient"
@@ -194,7 +194,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="ADD"
+                    android:text="Create"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:fontFamily="@font/spoqa_han_sans_bold"
