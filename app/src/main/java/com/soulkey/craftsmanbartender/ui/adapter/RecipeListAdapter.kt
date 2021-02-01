@@ -19,7 +19,7 @@ class RecipeListAdapter : ListAdapter<RecipeWithIngredient, RecipeListAdapter.Re
     }
 
     override fun areContentsTheSame(oldItem: RecipeWithIngredient, newItem: RecipeWithIngredient): Boolean {
-        return oldItem.basic.recipeBasicId == newItem.basic.recipeBasicId
+        return oldItem.basic.recipeId == newItem.basic.recipeId
     }
 }) {
     class RecipeViewHolder(

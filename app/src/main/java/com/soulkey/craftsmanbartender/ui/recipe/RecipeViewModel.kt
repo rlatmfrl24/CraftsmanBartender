@@ -25,13 +25,17 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
     val recipes : LiveData<List<RecipeWithIngredient>> = recipeRepository.getRecipes()
 
     fun initializeRecipe(recipeWithIngredient: RecipeWithIngredient) {
+        Timber.v("diver:/ $recipeWithIngredient")
         recipeBasic.value = recipeWithIngredient.basic
         ingredients.value = recipeWithIngredient.ingredients.toMutableList()
     }
 
     fun deleteCurrentRecipe(){
-        Timber.v("diver:/ ${recipeBasic.value}")
-
+        val deleteBasic = recipeBasic.value?: return
+        Timber.v("diver:/ $deleteBasic")
+        viewModelScope.launch {
+            recipeRepository.deleteRecipe(deleteBasic)
+        }
     }
 
     fun combineMakingStylesToString(): String? {
@@ -55,7 +59,7 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
         val ingredients = ingredients.value?: return
 
         recipeBasic.value = Recipe(
-            recipeBasicId = null,
+            recipeId = null,
             name = recipeName,
             glass = recipeGlass,
             garnish = recipeGarnish.value,

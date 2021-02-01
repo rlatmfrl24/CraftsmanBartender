@@ -10,10 +10,10 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity
 data class Recipe(
-    @PrimaryKey(autoGenerate = true) val recipeBasicId: Long?,
-    @ColumnInfo val name: String,
-    @ColumnInfo val primaryMakingStyle: MakingStyle,
-    @ColumnInfo val secondaryMakingStyle: MakingStyle?,
-    @ColumnInfo val glass: String,
-    @ColumnInfo val garnish: String?
+        @PrimaryKey(autoGenerate = true) val recipeId: Long?,
+        @ColumnInfo val name: String,
+        @ColumnInfo val primaryMakingStyle: MakingStyle,
+        @ColumnInfo val secondaryMakingStyle: MakingStyle?,
+        @ColumnInfo val glass: String,
+        @ColumnInfo val garnish: String?
 ) : Parcelable

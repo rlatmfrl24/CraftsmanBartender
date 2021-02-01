@@ -8,8 +8,8 @@ import kotlinx.android.parcel.Parcelize
 data class RecipeWithIngredient(
     @Embedded val basic: Recipe,
     @Relation(
-        parentColumn = "recipeBasicId",
-        entityColumn = "ingredientId"
+        parentColumn = "recipeId",
+        entityColumn = "recipeBasicId"
     )
     val ingredients: List<Ingredient>
 ) : Parcelable

@@ -39,6 +39,7 @@ class RecipeDetailActivity : BaseActivity() {
                 R.id.menu_recipe_detail_delete -> {
                     //Recipe Delete
                     recipeViewModel.deleteCurrentRecipe()
+                    finish()
                     true
                 }
                 else -> false

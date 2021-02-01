@@ -89,6 +89,7 @@ class AddRecipeActivity : BaseActivity() {
                                     }
                             Ingredient(
                                     ingredientId = null,
+                                    recipeBasicId = null,
                                     name = it.et_ingredient_name.text.toString(),
                                     amount = amount,
                                     unit = it.spinner_ingredient_unit.text.toString()

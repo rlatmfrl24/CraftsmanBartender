@@ -8,5 +8,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface RecipeRepository {
     suspend fun createRecipe(recipe: Recipe, ingredients: List<Ingredient>)
+    suspend fun deleteRecipe(recipe: Recipe)
     fun getRecipes(): LiveData<List<RecipeWithIngredient>>
 }

@@ -9,8 +9,9 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "ingredients")
 data class Ingredient(
-    @PrimaryKey(autoGenerate = true) val ingredientId: Long?,
-    @ColumnInfo val name: String,
-    @ColumnInfo val amount: Float?,
-    @ColumnInfo val unit: String
+        @PrimaryKey(autoGenerate = true) val ingredientId: Long?,
+        @ColumnInfo var recipeBasicId: Long?,
+        @ColumnInfo val name: String,
+        @ColumnInfo val amount: Float?,
+        @ColumnInfo val unit: String
 ) : Parcelable
