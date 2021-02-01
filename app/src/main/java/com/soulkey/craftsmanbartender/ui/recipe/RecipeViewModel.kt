@@ -18,8 +18,16 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
     val secondaryMakingStyle: MutableLiveData<MakingStyle> = MutableLiveData()
     val ingredients : MutableLiveData<MutableList<Ingredient>> = MutableLiveData(mutableListOf())
 
-
     val recipes : LiveData<List<RecipeWithIngredient>> = recipeRepository.getRecipes()
+
+    fun initializeRecipe(recipeWithIngredient: RecipeWithIngredient) {
+        recipeName.value = recipeWithIngredient.basic.name
+        recipeGlass.value = recipeWithIngredient.basic.glass
+        recipeGarnish.value = recipeWithIngredient.basic.garnish
+        primaryMakingStyle.value = recipeWithIngredient.basic.primaryMakingStyle
+        secondaryMakingStyle.value = recipeWithIngredient.basic.secondaryMakingStyle
+        ingredients.value = recipeWithIngredient.ingredients.toMutableList()
+    }
 
     fun addIngredient(ingredient: Ingredient) {
         ingredients.value?.toMutableList()?.apply {

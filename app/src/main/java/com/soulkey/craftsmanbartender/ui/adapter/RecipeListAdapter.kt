@@ -24,6 +24,7 @@ class RecipeListAdapter : ListAdapter<RecipeWithIngredient, RecipeListAdapter.Re
     ) : ViewHolder(binding.root){
         fun bind(item: RecipeWithIngredient){
             binding.tvRecipeName.text = item.basic.name
+
         }
     }
 

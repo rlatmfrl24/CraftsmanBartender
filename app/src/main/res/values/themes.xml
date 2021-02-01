@@ -30,4 +30,16 @@
         <item name="android:layout_margin">10dp</item>
     </style>
 
+    <style name="Theme.CraftsmanBartender.RecipeDetailTextAppearance">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/spoqa_han_sans_bold</item>
+    </style>
+
+    <style name="Theme.CraftsmanBartender.RecipeDetailHeaderTextAppearance">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="fontFamily">@font/spoqa_han_sans_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>
