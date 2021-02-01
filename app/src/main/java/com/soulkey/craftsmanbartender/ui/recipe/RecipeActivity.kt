@@ -7,10 +7,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ActivityRecipeBinding
+import com.soulkey.craftsmanbartender.lib.common.BaseActivity
 import com.soulkey.craftsmanbartender.ui.adapter.RecipeListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RecipeActivity : AppCompatActivity() {
+class RecipeActivity : BaseActivity() {
 
     private val recipeAdapter = RecipeListAdapter()
     private val recipeViewModel: RecipeViewModel by viewModel()

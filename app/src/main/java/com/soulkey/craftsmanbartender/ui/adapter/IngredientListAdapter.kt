@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.soulkey.craftsmanbartender.R
-import com.soulkey.craftsmanbartender.databinding.ItemAddRecipeIngredientBinding
+import com.soulkey.craftsmanbartender.databinding.ItemIngredientListBinding
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
 
 class IngredientListAdapter : ListAdapter<Ingredient, IngredientListAdapter.IngredientListViewHolder>(object : DiffUtil.ItemCallback<Ingredient>(){
@@ -21,8 +21,7 @@ class IngredientListAdapter : ListAdapter<Ingredient, IngredientListAdapter.Ingr
 }) {
 
     inner class IngredientListViewHolder(
-        private val parent: ViewGroup,
-        private val binding: ItemAddRecipeIngredientBinding
+        private val binding: ItemIngredientListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Ingredient)  {
             binding.tvIngredientName.text = item.name
@@ -32,9 +31,9 @@ class IngredientListAdapter : ListAdapter<Ingredient, IngredientListAdapter.Ingr
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientListViewHolder {
-        return IngredientListViewHolder(parent, DataBindingUtil.inflate(
+        return IngredientListViewHolder(DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_add_recipe_ingredient,
+            R.layout.item_ingredient_list,
             parent,
             false
         ))

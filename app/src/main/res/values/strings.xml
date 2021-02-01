@@ -3,4 +3,8 @@
     <string name="string_main_recipe_btn">Recipes</string>
     <string name="string_main_mock_test_btn">Mock Test</string>
     <string name="string_recipe_add_content_description">Add Recipes</string>
+    <string name="making_style_header">Making Style</string>
+    <string name="glass_header">Glass</string>
+    <string name="garnish_header">Garnish</string>
+    <string name="ingredients_header">Ingredients</string>
 </resources>

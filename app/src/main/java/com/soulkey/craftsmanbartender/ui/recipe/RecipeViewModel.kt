@@ -11,22 +11,34 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewModel(){
+    // for Create
     val recipeName: MutableLiveData<String> = MutableLiveData()
     val recipeGlass: MutableLiveData<String> = MutableLiveData()
     val recipeGarnish: MutableLiveData<String> = MutableLiveData()
     val primaryMakingStyle: MutableLiveData<MakingStyle> = MutableLiveData()
     val secondaryMakingStyle: MutableLiveData<MakingStyle> = MutableLiveData()
+
+    // for Detail
+    val recipeBasic: MutableLiveData<Recipe> = MutableLiveData()
     val ingredients : MutableLiveData<MutableList<Ingredient>> = MutableLiveData(mutableListOf())
 
     val recipes : LiveData<List<RecipeWithIngredient>> = recipeRepository.getRecipes()
 
     fun initializeRecipe(recipeWithIngredient: RecipeWithIngredient) {
-        recipeName.value = recipeWithIngredient.basic.name
-        recipeGlass.value = recipeWithIngredient.basic.glass
-        recipeGarnish.value = recipeWithIngredient.basic.garnish
-        primaryMakingStyle.value = recipeWithIngredient.basic.primaryMakingStyle
-        secondaryMakingStyle.value = recipeWithIngredient.basic.secondaryMakingStyle
+        recipeBasic.value = recipeWithIngredient.basic
         ingredients.value = recipeWithIngredient.ingredients.toMutableList()
+    }
+
+    fun deleteCurrentRecipe(){
+        Timber.v("diver:/ ${recipeBasic.value}")
+
+    }
+
+    fun combineMakingStylesToString(): String? {
+        val basic = recipeBasic.value ?: return null
+        val makingStyleString = basic.primaryMakingStyle.name
+        val secondStyle = basic.secondaryMakingStyle?: return makingStyleString
+        return makingStyleString + " / " + secondStyle.name
     }
 
     fun addIngredient(ingredient: Ingredient) {
@@ -42,7 +54,7 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
         val primaryMakingStyle = primaryMakingStyle.value?: return
         val ingredients = ingredients.value?: return
 
-        Recipe(
+        recipeBasic.value = Recipe(
             recipeBasicId = null,
             name = recipeName,
             glass = recipeGlass,
