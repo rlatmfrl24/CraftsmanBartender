@@ -111,6 +111,17 @@
                     app:setAdapter="@{adapter}"
                     tools:listitem="@layout/item_ingredient_list"/>
 
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkbox_apply_mock_test"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/string_apply_to_mock_test"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/spoqa_han_sans_bold"
+                    android:checked="@{viewModel.recipeBasic.applyMockTest}"
+                    app:layout_constraintTop_toBottomOf="@id/recycler_recipe_ingredients"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

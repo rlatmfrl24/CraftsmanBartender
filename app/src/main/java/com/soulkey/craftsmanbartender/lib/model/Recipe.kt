@@ -15,5 +15,6 @@ data class Recipe(
         @ColumnInfo val primaryMakingStyle: MakingStyle,
         @ColumnInfo val secondaryMakingStyle: MakingStyle?,
         @ColumnInfo val glass: String,
-        @ColumnInfo val garnish: String?
+        @ColumnInfo val garnish: String?,
+        @ColumnInfo var applyMockTest: Boolean
 ) : Parcelable

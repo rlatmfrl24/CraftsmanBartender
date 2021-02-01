@@ -7,4 +7,11 @@
     <string name="glass_header">Glass</string>
     <string name="garnish_header">Garnish</string>
     <string name="ingredients_header">Ingredients</string>
+    <string name="string_apply_to_mock_test">Apply to Mock Test</string>
+    <string name="string_add_ingredient">Add Ingredient</string>
+    <string name="string_ingredients">Ingredients</string>
+    <string name="string_secondary_making_style">Secondary Making Style</string>
+    <string name="string_primary_making_style">Primary Making Style</string>
+    <string name="string_name">Name</string>
+    <string name="string_create">Create</string>
 </resources>

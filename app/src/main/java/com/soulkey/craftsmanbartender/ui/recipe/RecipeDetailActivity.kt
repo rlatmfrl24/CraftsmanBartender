@@ -31,6 +31,10 @@ class RecipeDetailActivity : BaseActivity() {
             ingredientAdapter.submitList(list)
         })
 
+        binding.checkboxApplyMockTest.setOnCheckedChangeListener { _, isChecked ->
+            recipeViewModel.setApplyToMockTest(isChecked)
+        }
+
         binding.toolbarRecipeDetail.setNavigationOnClickListener {
             finish()
         }

@@ -17,6 +17,7 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
     val recipeGarnish: MutableLiveData<String> = MutableLiveData()
     val primaryMakingStyle: MutableLiveData<MakingStyle> = MutableLiveData()
     val secondaryMakingStyle: MutableLiveData<MakingStyle> = MutableLiveData()
+    val applyMockTest: MutableLiveData<Boolean> = MutableLiveData(true)
 
     // for Detail
     val recipeBasic: MutableLiveData<Recipe> = MutableLiveData()
@@ -58,6 +59,13 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
         }?.toMutableList()
     }
 
+    fun setApplyToMockTest(value: Boolean) {
+        val basicToApply = recipeBasic.value?: return
+        viewModelScope.launch {
+            recipeRepository.applyRecipeToMockTest(basicToApply, value)
+        }
+    }
+
     fun createRecipe() {
         val recipeName = recipeName.value?: return
         val recipeGlass = recipeGlass.value?: return
@@ -70,7 +78,8 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
             glass = recipeGlass,
             garnish = recipeGarnish.value,
             primaryMakingStyle = primaryMakingStyle,
-            secondaryMakingStyle = secondaryMakingStyle.value
+            secondaryMakingStyle = secondaryMakingStyle.value,
+            applyMockTest = applyMockTest.value!!
         ).also { recipe ->
             Timber.v("diver:/ recipeBasic -> $recipe")
             Timber.v("diver:/ ingredients -> $ingredients")

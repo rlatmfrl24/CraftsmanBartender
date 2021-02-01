@@ -15,4 +15,12 @@ class RecipeRepositoryImpl(private val recipeDao : RecipeDao) : RecipeRepository
     override suspend fun deleteRecipe(recipe: Recipe) {
         recipeDao.deleteRecipe(recipe = *arrayOf(recipe))
     }
+
+    override suspend fun applyRecipeToMockTest(recipe: Recipe, value: Boolean) {
+        recipe.apply {
+            applyMockTest = value
+        }.also {
+            recipeDao.updateRecipe(it)
+        }
+    }
 }
