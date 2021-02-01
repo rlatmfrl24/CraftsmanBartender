@@ -28,6 +28,8 @@ class RecipeListAdapter : ListAdapter<RecipeWithIngredient, RecipeListAdapter.Re
     ) : ViewHolder(binding.root){
         fun bind(item: RecipeWithIngredient){
             binding.tvRecipeName.text = item.basic.name
+
+            // Start RecipeDetailActivity by Selected Recipe
             binding.containerRecipeItem.setOnClickListener {
                 Intent(parent.context, RecipeDetailActivity::class.java).apply {
                     putExtra("recipe", item)

@@ -17,10 +17,8 @@ class RecipeRepositoryImpl(private val recipeDao : RecipeDao) : RecipeRepository
     }
 
     override suspend fun applyRecipeToMockTest(recipe: Recipe, value: Boolean) {
-        recipe.apply {
-            applyMockTest = value
-        }.also {
-            recipeDao.updateRecipe(it)
-        }
+        recipe
+        .apply { applyMockTest = value }
+        .also { recipeDao.updateRecipe(it) }
     }
 }

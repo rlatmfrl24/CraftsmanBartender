@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewModel(){
-    // for Create
+    // for AddRecipeActivity
     val recipeName: MutableLiveData<String> = MutableLiveData()
     val recipeGlass: MutableLiveData<String> = MutableLiveData()
     val recipeGarnish: MutableLiveData<String> = MutableLiveData()
@@ -19,26 +19,28 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
     val secondaryMakingStyle: MutableLiveData<MakingStyle> = MutableLiveData()
     val applyMockTest: MutableLiveData<Boolean> = MutableLiveData(true)
 
-    // for Detail
+    // for RecipeDetailActivity
     val recipeBasic: MutableLiveData<Recipe> = MutableLiveData()
     val ingredients : MutableLiveData<MutableList<Ingredient>> = MutableLiveData(mutableListOf())
 
+    // for RecipeActivity
     val recipes : LiveData<List<RecipeWithIngredient>> = recipeRepository.getRecipes()
 
+    // Initialize when RecipeDetailActivity-onCreate
     fun initializeRecipe(recipeWithIngredient: RecipeWithIngredient) {
-        Timber.v("diver:/ $recipeWithIngredient")
         recipeBasic.value = recipeWithIngredient.basic
         ingredients.value = recipeWithIngredient.ingredients.toMutableList()
     }
 
+    // Delete Recipe on RecipeDetailActivity
     fun deleteCurrentRecipe(){
         val deleteBasic = recipeBasic.value?: return
-        Timber.v("diver:/ $deleteBasic")
         viewModelScope.launch {
             recipeRepository.deleteRecipe(deleteBasic)
         }
     }
 
+    // Combine MakingStyle String for RecipeDetailActivity
     fun combineMakingStylesToString(): String? {
         val basic = recipeBasic.value ?: return null
         val makingStyleString = basic.primaryMakingStyle.name
@@ -46,6 +48,7 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
         return makingStyleString + " / " + secondStyle.name
     }
 
+    // Add Ingredient Data on AddRecipeActivity
     fun addIngredient(ingredient: Ingredient) {
         ingredients.value?.toMutableList()?.apply {
             add(ingredient)
@@ -53,12 +56,14 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
         }
     }
 
+    // Remove Ingredient Data on AddRecipeActivity
     fun removeIngredient(ingredient: Ingredient) {
         ingredients.value = ingredients.value?.filter {
             it != ingredient
         }?.toMutableList()
     }
 
+    // Update Recipe whether Apply to Mock Test
     fun setApplyToMockTest(value: Boolean) {
         val basicToApply = recipeBasic.value?: return
         viewModelScope.launch {
@@ -66,6 +71,7 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
         }
     }
 
+    // Create Recipe and Save to Database
     fun createRecipe() {
         val recipeName = recipeName.value?: return
         val recipeGlass = recipeGlass.value?: return
@@ -81,8 +87,6 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
             secondaryMakingStyle = secondaryMakingStyle.value,
             applyMockTest = applyMockTest.value!!
         ).also { recipe ->
-            Timber.v("diver:/ recipeBasic -> $recipe")
-            Timber.v("diver:/ ingredients -> $ingredients")
             viewModelScope.launch(Dispatchers.IO){
                 recipeRepository.createRecipe(recipe, ingredients)
             }

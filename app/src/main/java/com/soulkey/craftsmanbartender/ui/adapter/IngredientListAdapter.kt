@@ -32,11 +32,13 @@ class IngredientListAdapter : ListAdapter<Ingredient, IngredientListAdapter.Ingr
             binding.tvIngredientName.text = item.name
 
             when(IngredientUnit.valueOf(item.unit)) {
+                // Data View Type Setting by Ingredient Unit Type
                 IngredientUnit.fill -> {
                     binding.tvIngredientAmount.visibility = View.GONE
                     binding.tvIngredientUnit.text = "Fill-Up"
                 }
                 else -> {
+                    // Check Decimal Data (Non-Decimal to Int)
                     val amount = item.amount ?: return
                     if (amount % 1 != 0f) {
                         binding.tvIngredientAmount.text = item.amount.toString()

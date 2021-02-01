@@ -52,10 +52,7 @@ class AddRecipeActivity : BaseActivity() {
         binding.containerAddIngredient.setOnClickListener {
             addIngredientDialog().show()
         }
-
-
-
-
+        
         // Add Ingredient Fab Button Action
         binding.tvAddBtn.setOnClickListener {
             recipeViewModel.createRecipe()

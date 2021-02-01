@@ -23,10 +23,12 @@ class RecipeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding.adapter = recipeAdapter
 
+        // Apply Recipes to Recyclerview
         recipeViewModel.recipes.observe(this) { list->
             recipeAdapter.submitList(list)
         }
 
+        // Add Recipe Fab Button action
         binding.fabAddRecipe.setOnClickListener {
             Intent(this, AddRecipeActivity::class.java).apply {
                 startActivity(this)

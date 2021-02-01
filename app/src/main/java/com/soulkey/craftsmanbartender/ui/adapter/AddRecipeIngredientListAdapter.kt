@@ -30,11 +30,13 @@ class AddRecipeIngredientListAdapter(private val viewModel: RecipeViewModel) : L
             binding.tvIngredientName.text = item.name
 
             when(Constants.Companion.IngredientUnit.valueOf(item.unit)) {
+                // Data View Type Setting by Ingredient Unit Type
                 Constants.Companion.IngredientUnit.fill -> {
                     binding.tvIngredientAmount.visibility = View.GONE
                     binding.tvIngredientUnit.text = "Fill-Up"
                 }
                 else -> {
+                    // Check Decimal Data (Non-Decimal to Int)
                     val amount = item.amount ?: return
                     if (amount % 1 != 0f) {
                         binding.tvIngredientAmount.text = item.amount.toString()
@@ -45,6 +47,7 @@ class AddRecipeIngredientListAdapter(private val viewModel: RecipeViewModel) : L
                 }
             }
 
+            // Remove Ingredient Button Action
             binding.ivRemoveIngredient.setOnClickListener {
                 viewModel.removeIngredient(item)
             }

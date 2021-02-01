@@ -23,21 +23,27 @@ class RecipeDetailActivity : BaseActivity() {
         binding.viewModel = recipeViewModel
         binding.adapter = ingredientAdapter
 
+        // Initialize Recipe to ViewModel
         intent.getParcelableExtra<RecipeWithIngredient>("recipe")?.also { recipe->
             recipeViewModel.initializeRecipe(recipe)
         }
 
+        // Set Ingredients to Recyclerview
         recipeViewModel.ingredients.observe(this, Observer { list ->
             ingredientAdapter.submitList(list)
         })
 
+        // Apply to Mock Test Button Setting
         binding.checkboxApplyMockTest.setOnCheckedChangeListener { _, isChecked ->
             recipeViewModel.setApplyToMockTest(isChecked)
         }
 
+        // Toolbar - Back Button Action
         binding.toolbarRecipeDetail.setNavigationOnClickListener {
             finish()
         }
+
+        // Toolbar - Delete Button Action
         binding.toolbarRecipeDetail.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.menu_recipe_detail_delete -> {
