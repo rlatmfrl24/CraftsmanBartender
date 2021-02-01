@@ -1,9 +1,11 @@
 package com.soulkey.craftsmanbartender.lib.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 import com.soulkey.craftsmanbartender.lib.model.Recipe
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RecipeDao {
@@ -18,5 +20,5 @@ interface RecipeDao {
 
     @Transaction
     @Query("SELECT * FROM Recipe")
-    suspend fun getRecipes(): List<RecipeWithIngredient>
+    fun getRecipes(): LiveData<List<RecipeWithIngredient>>
 }

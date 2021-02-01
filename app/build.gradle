@@ -49,8 +49,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    // Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+
     //Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //Stetho
+    implementation 'com.facebook.stetho:stetho:1.5.1'
 
     // Koin
     implementation "org.koin:koin-androidx-scope:2.2.2"

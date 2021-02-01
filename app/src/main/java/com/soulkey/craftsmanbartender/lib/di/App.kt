@@ -2,11 +2,11 @@ package com.soulkey.craftsmanbartender.lib.di
 
 import android.app.Application
 import androidx.room.Room
+import com.facebook.stetho.Stetho
 import com.soulkey.craftsmanbartender.lib.data.RecipeRepository
 import com.soulkey.craftsmanbartender.lib.data.RecipeRepositoryImpl
 import com.soulkey.craftsmanbartender.lib.db.AppDatabase
-import com.soulkey.craftsmanbartender.lib.db.RecipeDao
-import com.soulkey.craftsmanbartender.ui.RecipeViewModel
+import com.soulkey.craftsmanbartender.ui.recipe.RecipeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -31,6 +31,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
+        Stetho.initializeWithDefaults(this)
         startKoin {
             androidLogger()
             androidContext(this@App)

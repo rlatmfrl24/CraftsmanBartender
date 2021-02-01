@@ -1,14 +1,12 @@
-package com.soulkey.craftsmanbartender.ui
+package com.soulkey.craftsmanbartender.ui.recipe
 
-import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.soulkey.craftsmanbartender.lib.common.Constants
+import androidx.lifecycle.*
 import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.MakingStyle
 import com.soulkey.craftsmanbartender.lib.data.RecipeRepository
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
 import com.soulkey.craftsmanbartender.lib.model.Recipe
+import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -18,18 +16,19 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
     val recipeGarnish: MutableLiveData<String> = MutableLiveData()
     val primaryMakingStyle: MutableLiveData<MakingStyle> = MutableLiveData()
     val secondaryMakingStyle: MutableLiveData<MakingStyle> = MutableLiveData()
-
     val ingredients : MutableLiveData<MutableList<Ingredient>> = MutableLiveData(mutableListOf())
 
+
+    val recipes : LiveData<List<RecipeWithIngredient>> = recipeRepository.getRecipes()
+
     fun addIngredient(ingredient: Ingredient) {
-        Timber.v("diver:/ ingredient")
         ingredients.value?.toMutableList()?.apply {
             add(ingredient)
             ingredients.value = this
         }
     }
 
-    suspend fun createRecipe() {
+    fun createRecipe() {
         val recipeName = recipeName.value?: return
         val recipeGlass = recipeGlass.value?: return
         val primaryMakingStyle = primaryMakingStyle.value?: return
@@ -43,7 +42,11 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
             primaryMakingStyle = primaryMakingStyle,
             secondaryMakingStyle = secondaryMakingStyle.value
         ).also { recipe ->
-            recipeRepository.createRecipe(recipe, ingredients)
+            Timber.v("diver:/ recipeBasic -> $recipe")
+            Timber.v("diver:/ ingredients -> $ingredients")
+            viewModelScope.launch(Dispatchers.IO){
+                recipeRepository.createRecipe(recipe, ingredients)
+            }
         }
     }
 }

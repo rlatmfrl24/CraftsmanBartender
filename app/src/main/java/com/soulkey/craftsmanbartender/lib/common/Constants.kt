@@ -9,7 +9,8 @@ class Constants {
             Stir,
             Float,
             Shake,
-            Blend
+            Blend,
+            None
         }
         enum class IngredientUnit {
             oz,
@@ -22,12 +23,16 @@ class Constants {
 
         class Converters {
             @TypeConverter
-            fun makingStyleToString(makingStyle: MakingStyle): String {
-                return makingStyle.name
+            fun makingStyleToString(makingStyle: MakingStyle?): String? {
+                return makingStyle?.name
             }
             @TypeConverter
-            fun intToMakingStyles(value: String): MakingStyle {
-                return MakingStyle.valueOf(value)
+            fun stringToMakingStyles(value: String?): MakingStyle {
+                return if (value.isNullOrEmpty()) {
+                    MakingStyle.None
+                } else {
+                    MakingStyle.valueOf(value)
+                }
             }
         }
     }

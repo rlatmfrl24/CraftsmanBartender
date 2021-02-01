@@ -3,7 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.RecipeActivity">
+    tools:context=".ui.recipe.RecipeActivity">
+
+    <data>
+        <variable
+            name="adapter"
+            type="com.soulkey.craftsmanbartender.ui.adapter.RecipeListAdapter" />
+    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -40,6 +46,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:setAdapter="@{adapter}"
                     tools:listitem="@layout/item_recipe_list"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

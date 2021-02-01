@@ -12,24 +12,23 @@ import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 
 class RecipeListAdapter : ListAdapter<RecipeWithIngredient, RecipeListAdapter.RecipeViewHolder>(object: DiffUtil.ItemCallback<RecipeWithIngredient>(){
     override fun areItemsTheSame(oldItem: RecipeWithIngredient, newItem: RecipeWithIngredient): Boolean {
-        return oldItem.basic.recipeBasicId == newItem.basic.recipeBasicId
+        return oldItem == newItem
     }
 
     override fun areContentsTheSame(oldItem: RecipeWithIngredient, newItem: RecipeWithIngredient): Boolean {
-        return oldItem == newItem
+        return oldItem.basic.recipeBasicId == newItem.basic.recipeBasicId
     }
 }) {
     class RecipeViewHolder(
-            private val parent: ViewGroup,
             private val binding: ItemRecipeListBinding
     ) : ViewHolder(binding.root){
         fun bind(item: RecipeWithIngredient){
-
+            binding.tvRecipeName.text = item.basic.name
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
-        return RecipeViewHolder(parent, DataBindingUtil.inflate(
+        return RecipeViewHolder(DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
                 R.layout.item_recipe_list,
                 parent,

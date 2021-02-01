@@ -3,12 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.AddRecipeActivity">
+    tools:context=".ui.recipe.AddRecipeActivity">
 
     <data>
         <variable
             name="viewModel"
-            type="com.soulkey.craftsmanbartender.ui.RecipeViewModel" />
+            type="com.soulkey.craftsmanbartender.ui.recipe.RecipeViewModel" />
+        <variable
+            name="adapter"
+            type="com.soulkey.craftsmanbartender.ui.adapter.IngredientListAdapter" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -127,6 +130,7 @@
                             android:id="@+id/spinner_secondary_making_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            text="@={viewModel.secondaryMakingStyle}"
                             android:inputType="none"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -148,6 +152,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:setAdapter="@{adapter}"
                         app:layout_constraintTop_toBottomOf="@id/tv_header_ingredients"
                         tools:listitem="@layout/item_add_recipe_ingredient"/>
                     
