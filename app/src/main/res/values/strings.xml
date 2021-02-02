@@ -14,4 +14,17 @@
     <string name="string_primary_making_style">Primary Making Style</string>
     <string name="string_name">Name</string>
     <string name="string_create">Create</string>
+    <string name="string_start">Start</string>
+    <string name="string_mock_test_intro_header">조주기능사 모의 실기 테스트</string>
+    <string name="string_mock_test_intro_description">
+        1. `Start` 버튼을 누르면 카운트다운 후 테스트가 시작됩니다\n
+        2. 테스트가 시작되면 화면 상단에 7분의 Timer 가 동작합니다\n
+        3. 화면 중앙에는 사용자가 설정한 조주기능사 레시피 중 무작위로 3가지가 표시됩니다\n
+        4. 레시피는 이름만 표시되며, 상세 레시피는 보이지 않습니다\n
+        5. 제조가 완료되면 레시피명 좌측의 완료버튼을 클릭해주세요\n
+        6. 만약 레시피를 다른걸로 바꾸고 싶다면 바꿀 레시피의 우측의 갱신 버튼을 눌러주세요\n
+        7. 레시피를 다른 것으로 갱신하더라도 Timer 는 초기화되지 않습니다\n
+        8. 레시피명을 클릭하면 상세 레시피가 팝업으로 표시됩니다\n
+        9. 3개의 레시피의 완료 버튼를 모두 누르거나, 7분의 타이머가 종료되면 자동으로 테스트가 종료됩니다\n
+    </string>
 </resources>

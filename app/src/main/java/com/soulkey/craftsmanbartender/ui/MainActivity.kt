@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ActivityMainBinding
 import com.soulkey.craftsmanbartender.lib.common.BaseActivity
+import com.soulkey.craftsmanbartender.ui.mocktest.MockTestActivity
 import com.soulkey.craftsmanbartender.ui.recipe.RecipeActivity
 
 class MainActivity : BaseActivity() {
@@ -23,7 +24,9 @@ class MainActivity : BaseActivity() {
             }
         }
         binding.cardMostTestBtn.setOnClickListener {
-
+            Intent(this, MockTestActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 }
