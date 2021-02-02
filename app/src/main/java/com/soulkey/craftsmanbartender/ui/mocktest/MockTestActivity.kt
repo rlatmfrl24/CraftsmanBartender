@@ -6,8 +6,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.lib.common.BaseActivity
 import kotlinx.android.synthetic.main.activity_mock_test.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MockTestActivity : BaseActivity() {
+
+    private val mockTestViewModel: MockTestViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

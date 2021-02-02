@@ -6,6 +6,7 @@ import com.facebook.stetho.Stetho
 import com.soulkey.craftsmanbartender.lib.data.RecipeRepository
 import com.soulkey.craftsmanbartender.lib.data.RecipeRepositoryImpl
 import com.soulkey.craftsmanbartender.lib.db.AppDatabase
+import com.soulkey.craftsmanbartender.ui.mocktest.MockTestViewModel
 import com.soulkey.craftsmanbartender.ui.recipe.RecipeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -26,6 +27,7 @@ class App : Application() {
         single<RecipeRepository> { RecipeRepositoryImpl(get()) }
 
         viewModel { RecipeViewModel(get()) }
+        viewModel { MockTestViewModel(get()) }
     }
 
     override fun onCreate() {

@@ -9,9 +9,15 @@ import java.lang.Exception
 
 class RecipeRepositoryImpl(private val recipeDao : RecipeDao) : RecipeRepository {
     override fun getRecipes() = recipeDao.getRecipes()
+
+    override suspend fun getAllRecipes(): List<RecipeWithIngredient> {
+        return recipeDao.getAllRecipes()
+    }
+
     override suspend fun createRecipe(recipe: Recipe, ingredients: List<Ingredient>) {
         recipeDao.createRecipe(recipe, ingredients)
     }
+
     override suspend fun deleteRecipe(recipe: Recipe) {
         recipeDao.deleteRecipe(recipe = *arrayOf(recipe))
     }

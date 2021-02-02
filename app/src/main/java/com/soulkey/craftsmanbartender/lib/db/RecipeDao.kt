@@ -32,5 +32,11 @@ interface RecipeDao {
 
     @Transaction
     @Query("SELECT * FROM Recipe")
+    suspend fun getAllRecipes(): List<RecipeWithIngredient>
+
+    @Transaction
+    @Query("SELECT * FROM Recipe")
     fun getRecipes(): LiveData<List<RecipeWithIngredient>>
+
+
 }

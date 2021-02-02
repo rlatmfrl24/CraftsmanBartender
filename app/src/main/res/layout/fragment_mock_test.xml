@@ -3,6 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <variable
+            name="viewModel"
+            type="com.soulkey.craftsmanbartender.ui.mocktest.MockTestViewModel" />
+        
+    </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,11 +52,10 @@
                     android:id="@+id/tv_first_recipe_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recipe Name"
+                    android:text="@{viewModel.firstRecipe.basic.name, default=`First Recipe`}"
                     android:textSize="24sp"
                     android:fontFamily="@font/spoqa_han_sans_bold"
                     android:layout_marginVertical="10dp"
-                    android:layout_marginStart="20dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_first_recipe_complete"
@@ -97,11 +103,10 @@
                     android:id="@+id/tv_second_recipe_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recipe Name"
+                    android:text="@{viewModel.secondRecipe.basic.name, default=`Second Recipe`}"
                     android:textSize="24sp"
                     android:fontFamily="@font/spoqa_han_sans_bold"
                     android:layout_marginVertical="10dp"
-                    android:layout_marginStart="20dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_second_recipe_complete"
@@ -149,11 +154,10 @@
                     android:id="@+id/tv_third_recipe_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recipe Name"
+                    android:text="@{viewModel.thirdRecipe.basic.name, default=`Third Recipe`}"
                     android:textSize="24sp"
                     android:fontFamily="@font/spoqa_han_sans_bold"
                     android:layout_marginVertical="10dp"
-                    android:layout_marginStart="20dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_third_recipe_complete"

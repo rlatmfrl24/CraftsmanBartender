@@ -10,5 +10,6 @@ interface RecipeRepository {
     suspend fun createRecipe(recipe: Recipe, ingredients: List<Ingredient>)
     suspend fun deleteRecipe(recipe: Recipe)
     suspend fun applyRecipeToMockTest(recipe: Recipe, value: Boolean)
+    suspend fun getAllRecipes(): List<RecipeWithIngredient>
     fun getRecipes(): LiveData<List<RecipeWithIngredient>>
 }
