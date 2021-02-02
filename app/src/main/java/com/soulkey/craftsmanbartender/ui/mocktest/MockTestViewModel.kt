@@ -23,42 +23,27 @@ class MockTestViewModel(private val recipeRepository: RecipeRepository) : ViewMo
         viewModelScope.launch {
             testRecipes = recipeRepository.getAllRecipes().filter { it.basic.applyMockTest }.toMutableList()
             Timber.v("diver:/ $testRecipes")
+            assignAllRecipe()
         }
     }
 
-    private fun assignRecipe(): RecipeWithIngredient? {
+    fun assignRecipe(): RecipeWithIngredient? {
         return if (testRecipes.isNotEmpty()){
-            val assignedRecipe = testRecipes.shuffled()[0]
-            testRecipes.removeAt(0)
-            return assignedRecipe
+            testRecipes.shuffled()[0].also { recipe ->
+                testRecipes.remove(recipe)
+                return recipe
+            }
         } else {
             null
         }
     }
 
-    fun assignFirstRecipe() {
-        assignRecipe()?.let {
-            Timber.v("diver:/ First Recipe -> $it")
-            firstRecipe.value = it
+    private fun assignAllRecipe() {
+        listOf(firstRecipe, secondRecipe, thirdRecipe).map { target ->
+            assignRecipe()?.let { recipe ->
+                target.value = recipe
+            }
         }
-    }
-    fun assignSecondRecipe(){
-        assignRecipe()?.let {
-            Timber.v("diver:/ Second Recipe -> $it")
-            secondRecipe.value = it
-        }
-    }
-    fun assignThirdRecipe(){
-        assignRecipe()?.let {
-            Timber.v("diver:/ Third Recipe -> $it")
-            thirdRecipe.value = it
-        }
-    }
-
-    fun assignAllRecipe() {
-        assignFirstRecipe()
-        assignSecondRecipe()
-        assignThirdRecipe()
     }
 
 }

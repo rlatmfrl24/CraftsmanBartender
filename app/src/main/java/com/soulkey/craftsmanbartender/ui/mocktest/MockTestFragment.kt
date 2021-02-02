@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.FragmentMockTestBinding
+import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -26,62 +30,44 @@ class MockTestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.viewModel = mockTestViewModel
         mockTestViewModel.initializeTestRecipe()
-        mockTestViewModel.assignAllRecipe()
 
-        // First Recipe Complete Action & View Setting
-        mockTestViewModel.isFirstRecipeComplete.observe(viewLifecycleOwner, Observer {
-            when(it) {
-                true -> binding.ivFirstRecipeComplete.setImageResource(R.drawable.ic_check_circle_24px)
-                false -> binding.ivFirstRecipeComplete.setImageResource(R.drawable.ic_circle_24px)
-            }
-        })
-        binding.ivFirstRecipeComplete.setOnClickListener {
-            mockTestViewModel.isFirstRecipeComplete.value?.let {
-                mockTestViewModel.isFirstRecipeComplete.value = !it
-            }
-        }
+        // Complete Toggle Button Setting
+        linkToggleWithData(mockTestViewModel.isFirstRecipeComplete, binding.ivFirstRecipeComplete)
+        linkToggleWithData(mockTestViewModel.isSecondRecipeComplete, binding.ivSecondRecipeComplete)
+        linkToggleWithData(mockTestViewModel.isThirdRecipeComplete, binding.ivThirdRecipeComplete)
 
-        // Second Recipe Complete Action & View Setting
-        mockTestViewModel.isSecondRecipeComplete.observe(viewLifecycleOwner, Observer {
-            when(it) {
-                true -> binding.ivSecondRecipeComplete.setImageResource(R.drawable.ic_check_circle_24px)
-                false -> binding.ivSecondRecipeComplete.setImageResource(R.drawable.ic_circle_24px)
-            }
-        })
-        binding.ivSecondRecipeComplete.setOnClickListener {
-            mockTestViewModel.isSecondRecipeComplete.value?.let {
-                mockTestViewModel.isSecondRecipeComplete.value = !it
-            }
-        }
-
-        // Third Recipe Complete Action & View Setting
-        mockTestViewModel.isThirdRecipeComplete.observe(viewLifecycleOwner, Observer {
-            when(it) {
-                true -> binding.ivThirdRecipeComplete.setImageResource(R.drawable.ic_check_circle_24px)
-                false -> binding.ivThirdRecipeComplete.setImageResource(R.drawable.ic_circle_24px)
-            }
-        })
-        binding.ivThirdRecipeComplete.setOnClickListener {
-            mockTestViewModel.isThirdRecipeComplete.value?.let {
-                mockTestViewModel.isThirdRecipeComplete.value = !it
-            }
-        }
-
+        // Reroll Button Setting
         binding.ivFirstRecipeReroll.setOnClickListener {
-            lifecycleScope.launch {
-                mockTestViewModel.assignFirstRecipe()
-            }
+            rerollRecipe(mockTestViewModel.firstRecipe)
         }
         binding.ivSecondRecipeReroll.setOnClickListener {
-            lifecycleScope.launch {
-                mockTestViewModel.assignSecondRecipe()
-            }
+            rerollRecipe(mockTestViewModel.secondRecipe)
         }
         binding.ivThirdRecipeReroll.setOnClickListener {
-            lifecycleScope.launch {
-                mockTestViewModel.assignThirdRecipe()
+            rerollRecipe(mockTestViewModel.thirdRecipe)
+        }
+    }
+
+    private fun rerollRecipe(target: MutableLiveData<RecipeWithIngredient>) {
+        if (mockTestViewModel.testRecipes.isNotEmpty()){
+            target.value = mockTestViewModel.assignRecipe()
+        } else {
+            Toast.makeText(context, "더이상 Recipe 를 교체할 수 없습니다", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun linkToggleWithData(data: MutableLiveData<Boolean>, view: ImageView) {
+        data.observe(viewLifecycleOwner, Observer { isCompleted->
+            when(isCompleted) {
+                true -> view.setImageResource(R.drawable.ic_check_circle_24px)
+                false -> view.setImageResource(R.drawable.ic_circle_24px)
+            }
+        })
+        view.setOnClickListener {
+            data.value?.let { oldValue->
+                data.value = !oldValue
             }
         }
     }
