@@ -58,7 +58,7 @@
                     style="@style/Theme.CraftsmanBartender.RecipeDetailTextAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.combineMakingStylesToString(), default=`Making Style Undefined`}"
+                    android:text="@{viewModel.recipeBasic.combineMakingStylesToString(), default=`Making Style Undefined`}"
                     app:layout_constraintTop_toBottomOf="@id/tv_header_making_style"/>
 
                 <TextView

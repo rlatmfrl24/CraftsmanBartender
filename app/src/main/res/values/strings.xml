@@ -27,4 +27,20 @@
         8. 레시피명을 클릭하면 상세 레시피가 팝업으로 표시됩니다\n
         9. 3개의 레시피의 완료 버튼를 모두 누르거나, 7분의 타이머가 종료되면 자동으로 테스트가 종료됩니다\n
     </string>
+    <string name="string_warning_recipe_hint_event_message">
+        실제 실기시험 환경에서는 레시피 힌트가 제공되지 않습니다\n
+        되도록 레시피 힌트를 보지 않고 모의 테스트에 임하는 것을 추천합니다\n
+        정말로 레시피 힌트를 보시겠어요?
+    </string>
+    <string name="string_test_greet">
+        수고하셨습니다!\n
+        테스트 결과를 확인해보세요
+    </string>
+    <string name="string_skipped_recipe_header">Skipped Recipes</string>
+    <string name="string_hint_checked_recipes_header">Hint Checked Recipes</string>
+    <string name="string_test_recipes_header">Test Recipes</string>
+    <string name="string_first_recipe">First Recipe</string>
+    <string name="string_second_recipe">Second Recipe</string>
+    <string name="string_retry">Retry</string>
+    <string name="string_done">Done</string>
 </resources>

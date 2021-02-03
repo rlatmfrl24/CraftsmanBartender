@@ -13,10 +13,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.FragmentCountDownBinding
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CountDownFragment : Fragment() {
     private lateinit var binding: FragmentCountDownBinding
-
+    private val mockTestViewModel: MockTestViewModel by sharedViewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,6 +30,7 @@ class CountDownFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mockTestViewModel.initializeTestRecipe()
 
         val timer = object : CountDownTimer(4000, 1000) {
             override fun onTick(millisUntilFinished: Long) {

@@ -1,8 +1,10 @@
 package com.soulkey.craftsmanbartender.ui.mocktest
 
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.soulkey.craftsmanbartender.lib.common.BaseUtil.Companion.addSourceList
 import com.soulkey.craftsmanbartender.lib.data.RecipeRepository
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 import kotlinx.coroutines.launch
@@ -14,6 +16,26 @@ class MockTestViewModel(private val recipeRepository: RecipeRepository) : ViewMo
     val isFirstRecipeComplete : MutableLiveData<Boolean> = MutableLiveData(false)
     val isSecondRecipeComplete : MutableLiveData<Boolean> = MutableLiveData(false)
     val isThirdRecipeComplete : MutableLiveData<Boolean> = MutableLiveData(false)
+    val isTimerFinished : MutableLiveData<Boolean> = MutableLiveData(false)
+
+    val skipCocktail = mutableListOf<RecipeWithIngredient>()
+    val recipeCheckCocktail = mutableListOf<RecipeWithIngredient>()
+    val incompleteCocktail = mutableListOf<RecipeWithIngredient>()
+    val completeCocktail = mutableListOf<RecipeWithIngredient>()
+
+    val isTestFinished = MediatorLiveData<Boolean>().apply {
+        addSourceList(
+            isFirstRecipeComplete,
+            isSecondRecipeComplete,
+            isThirdRecipeComplete,
+            isTimerFinished
+        ) {
+            (isFirstRecipeComplete.value!!
+                && isSecondRecipeComplete.value!!
+                && isThirdRecipeComplete.value!!)
+            || isTimerFinished.value!!
+        }
+    }
 
     val firstRecipe: MutableLiveData<RecipeWithIngredient> = MutableLiveData()
     val secondRecipe: MutableLiveData<RecipeWithIngredient> = MutableLiveData()
@@ -21,6 +43,11 @@ class MockTestViewModel(private val recipeRepository: RecipeRepository) : ViewMo
 
     fun initializeTestRecipe() {
         viewModelScope.launch {
+            isTimerFinished.value = false
+            isFirstRecipeComplete.value = false
+            isSecondRecipeComplete.value = false
+            isThirdRecipeComplete.value = false
+            isTestFinished.value = false
             testRecipes = recipeRepository.getAllRecipes().filter { it.basic.applyMockTest }.toMutableList()
             Timber.v("diver:/ $testRecipes")
             assignAllRecipe()
@@ -33,9 +60,7 @@ class MockTestViewModel(private val recipeRepository: RecipeRepository) : ViewMo
                 testRecipes.remove(recipe)
                 return recipe
             }
-        } else {
-            null
-        }
+        } else { null }
     }
 
     private fun assignAllRecipe() {

@@ -40,14 +40,6 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
         }
     }
 
-    // Combine MakingStyle String for RecipeDetailActivity
-    fun combineMakingStylesToString(): String? {
-        val basic = recipeBasic.value ?: return null
-        val makingStyleString = basic.primaryMakingStyle.name
-        val secondStyle = basic.secondaryMakingStyle?: return makingStyleString
-        return makingStyleString + " / " + secondStyle.name
-    }
-
     // Add Ingredient Data on AddRecipeActivity
     fun addIngredient(ingredient: Ingredient) {
         ingredients.value?.toMutableList()?.apply {

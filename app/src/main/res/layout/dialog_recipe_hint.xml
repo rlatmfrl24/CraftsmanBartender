@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp">
+
+    <TextView
+        android:id="@+id/tv_header_making_style"
+        style="@style/Theme.CraftsmanBartender.RecipeDetailHeaderTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/making_style_header"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_making_style"
+        style="@style/Theme.CraftsmanBartender.RecipeDetailTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Making Style String"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_making_style"/>
+
+    <TextView
+        android:id="@+id/tv_header_glass"
+        style="@style/Theme.CraftsmanBartender.RecipeDetailHeaderTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/glass_header"
+        app:layout_constraintTop_toBottomOf="@id/tv_making_style"/>
+
+    <TextView
+        android:id="@+id/tv_glass"
+        style="@style/Theme.CraftsmanBartender.RecipeDetailTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Glass String"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_glass"/>
+
+    <TextView
+        android:id="@+id/tv_header_garnish"
+        style="@style/Theme.CraftsmanBartender.RecipeDetailHeaderTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/garnish_header"
+        app:layout_constraintTop_toBottomOf="@id/tv_glass"/>
+
+    <TextView
+        android:id="@+id/tv_garnish"
+        style="@style/Theme.CraftsmanBartender.RecipeDetailTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Garnish String"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_garnish"/>
+
+    <TextView
+        android:id="@+id/tv_header_ingredients"
+        style="@style/Theme.CraftsmanBartender.RecipeDetailHeaderTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ingredients_header"
+        app:layout_constraintTop_toBottomOf="@id/tv_garnish"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_recipe_ingredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_ingredient_list"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_ingredients"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,5 +28,18 @@
         android:id="@+id/mockTestFragment"
         android:name="com.soulkey.craftsmanbartender.ui.mocktest.MockTestFragment"
         android:label="MockTestFragment"
-        tools:layout="@layout/fragment_mock_test"/>
+        tools:layout="@layout/fragment_mock_test">
+        <action
+            android:id="@+id/action_mockTestFragment_to_testResultFragment"
+            app:destination="@id/testResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testResultFragment"
+        android:name="com.soulkey.craftsmanbartender.ui.mocktest.TestResultFragment"
+        android:label="TestResultFragment"
+        tools:layout="@layout/fragment_test_result">
+        <action
+            android:id="@+id/action_testResultFragment_to_countDownFragment"
+            app:destination="@id/countDownFragment" />
+    </fragment>
 </navigation>
