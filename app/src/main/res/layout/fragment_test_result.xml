@@ -4,6 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="skippedRecipesAdapter"
+            type="com.soulkey.craftsmanbartender.ui.adapter.ResultRecipeListAdapter" />
+        <variable
+            name="hintCheckedRecipesAdapter"
+            type="com.soulkey.craftsmanbartender.ui.adapter.ResultRecipeListAdapter" />
+    </data>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,11 +70,14 @@
                         app:layout_constraintTop_toBottomOf="@id/skipped_recipes_header"/>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_skipped_recipes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:setAdapter="@{skippedRecipesAdapter}"
                         app:layout_constraintTop_toBottomOf="@id/divider_skipped_recipes"
+                        tools:listitem="@layout/item_result_recipe_list"
                         tools:itemCount="2"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -101,11 +113,14 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_hint_checked_recipes_header"/>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_hint_checked_recipes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:setAdapter="@{hintCheckedRecipesAdapter}"
                         app:layout_constraintTop_toBottomOf="@id/divider_hint_checked_recipes"
+                        tools:listitem="@layout/item_result_recipe_list"
                         tools:itemCount="2"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -150,6 +165,7 @@
                         android:layout_marginTop="10dp"
                         android:text="@string/string_first_recipe"
                         android:textSize="21sp"
+                        android:textColor="@color/black"
                         android:fontFamily="@font/spoqa_han_sans_bold"
                         app:layout_constraintTop_toBottomOf="@id/divider_test_recipes"
                         app:layout_constraintStart_toStartOf="parent"
@@ -171,6 +187,7 @@
                         android:layout_marginTop="5dp"
                         android:text="@string/string_second_recipe"
                         android:textSize="21sp"
+                        android:textColor="@color/black"
                         android:fontFamily="@font/spoqa_han_sans_bold"
                         app:layout_constraintTop_toBottomOf="@id/tv_first_recipe_name"
                         app:layout_constraintStart_toStartOf="parent"
@@ -192,6 +209,7 @@
                         android:layout_marginTop="5dp"
                         android:text="Third Recipe"
                         android:textSize="21sp"
+                        android:textColor="@color/black"
                         android:fontFamily="@font/spoqa_han_sans_bold"
                         app:layout_constraintEnd_toStartOf="@id/iv_third_recipe_is_completed"
                         app:layout_constraintTop_toBottomOf="@id/tv_second_recipe_name"
