@@ -3,7 +3,7 @@ package com.soulkey.craftsmanbartender.ui.recipe
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.soulkey.craftsmanbartender.R
@@ -14,7 +14,6 @@ import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.IngredientU
 import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.MakingStyle
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
 import com.soulkey.craftsmanbartender.ui.adapter.AddRecipeIngredientListAdapter
-import com.soulkey.craftsmanbartender.ui.adapter.IngredientListAdapter
 import kotlinx.android.synthetic.main.dialog_add_ingredient.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,9 +43,9 @@ class AddRecipeActivity : BaseActivity() {
         binding.tilRecipePrimaryMakingStyle.makeRequiredInRed()
 
         // Set Ingredient List
-        recipeViewModel.ingredients.observe(this) {
+        recipeViewModel.ingredients.observe(this, Observer {
             ingredientAdapter.submitList(it)
-        }
+        })
 
         // Set Add Ingredient Action
         binding.containerAddIngredient.setOnClickListener {
