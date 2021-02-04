@@ -18,6 +18,13 @@ interface RecipeDao {
         }.also { insertIngredients(it) }
     }
 
+    @Transaction
+    @Delete
+    suspend fun deleteRecipe(recipe: Recipe, ingredients: List<Ingredient>) {
+        deleteRecipeBasic(recipe)
+        deleteIngredients(ingredients)
+    }
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipe(recipe: Recipe) : Long
 
@@ -28,7 +35,10 @@ interface RecipeDao {
     suspend fun updateRecipe(vararg recipe: Recipe)
 
     @Delete
-    suspend fun deleteRecipe(vararg recipe: Recipe)
+    suspend fun deleteRecipeBasic(vararg recipe: Recipe)
+
+    @Delete
+    suspend fun deleteIngredients(ingredients: List<Ingredient>)
 
     @Transaction
     @Query("SELECT * FROM Recipe")

@@ -1,6 +1,7 @@
 package com.soulkey.craftsmanbartender.ui.recipe
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -54,9 +55,51 @@ class AddRecipeActivity : BaseActivity() {
         
         // Add Ingredient Fab Button Action
         binding.tvAddBtn.setOnClickListener {
-            recipeViewModel.createRecipe()
-            finish()
+            if (checkInputValidation()) {
+                recipeViewModel.createRecipe()
+                finish()
+            }
         }
+    }
+
+    private fun checkInputValidation(): Boolean {
+        val isInputValid =
+                !recipeViewModel.recipeName.value.isNullOrBlank()
+                && !recipeViewModel.recipeGlass.value.isNullOrBlank()
+                && recipeViewModel.primaryMakingStyle.value != null
+                && !recipeViewModel.ingredients.value.isNullOrEmpty()
+
+        if (isInputValid) {
+            if (recipeViewModel.secondaryMakingStyle.value == null) {
+                recipeViewModel.secondaryMakingStyle.value = MakingStyle.None
+            }
+            if (recipeViewModel.recipeGarnish.value.isNullOrBlank()) {
+                recipeViewModel.recipeGarnish.value = "None"
+            }
+        } else {
+            if (recipeViewModel.recipeName.value.isNullOrBlank()) {
+                binding.tilRecipeName.error = "Please Insert Recipe's Name"
+            } else {
+                binding.tilRecipeName.isErrorEnabled = false
+            }
+            if (recipeViewModel.recipeGlass.value.isNullOrBlank()) {
+                binding.tilRecipeGlass.error = "Please Insert Glass for Cocktail"
+            } else {
+                binding.tilRecipeGlass.isErrorEnabled = false
+            }
+            if (recipeViewModel.primaryMakingStyle.value == null) {
+                binding.tilRecipePrimaryMakingStyle.error = "You must choice Primary Making Style"
+            } else {
+                binding.tilRecipePrimaryMakingStyle.isErrorEnabled = false
+            }
+            if (recipeViewModel.ingredients.value.isNullOrEmpty()) {
+                binding.containerErrorMsgIngredient.visibility = View.VISIBLE
+            } else {
+                binding.containerErrorMsgIngredient.visibility = View.INVISIBLE
+            }
+        }
+
+        return isInputValid
     }
 
     // Add Ingredient Dialog Setting
@@ -81,12 +124,8 @@ class AddRecipeActivity : BaseActivity() {
                         else -> {
                             val amount =
                                     when {
-                                        it.et_ingredient_amount.text?.toString().isNullOrEmpty() -> {
-                                            0f
-                                        }
-                                        it.et_ingredient_amount.text?.toString().equals("-") -> {
-                                            0f
-                                        }
+                                        it.et_ingredient_amount.text?.toString().isNullOrEmpty() -> { 0f }
+                                        it.et_ingredient_amount.text?.toString().equals("-") -> { 0f }
                                         else -> it.et_ingredient_amount.text?.toString()?.toFloat()
                                     }
                             Ingredient(

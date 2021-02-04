@@ -56,6 +56,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/string_name"
+                        app:errorContentDescription="Please Insert Recipe's Name"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -147,15 +148,46 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/til_recipe_secondary_making_style"/>
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/container_error_msg_ingredient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_header_ingredients"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_header_ingredients">
+                        <ImageView
+                            android:id="@+id/iv_error_ingredient"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginEnd="3dp"
+                            android:src="@drawable/ic_error_red_24px"
+                            app:layout_constraintTop_toTopOf="@id/tv_error_msg_ingredient"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_error_msg_ingredient"
+                            app:layout_constraintEnd_toStartOf="@id/tv_error_msg_ingredient"/>
+
+                        <TextView
+                            android:id="@+id/tv_error_msg_ingredient"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="You must insert one Ingredient at least"
+                            android:textColor="@color/red_600"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_add_recipe_ingredients"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:setAdapter="@{adapter}"
                         app:layout_constraintTop_toBottomOf="@id/tv_header_ingredients"
                         tools:listitem="@layout/item_add_recipe_ingredient_list"/>
-                    
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/container_add_ingredient"
                         android:layout_width="match_parent"

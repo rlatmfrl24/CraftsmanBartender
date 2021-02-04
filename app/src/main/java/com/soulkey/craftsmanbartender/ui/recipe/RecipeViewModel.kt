@@ -35,8 +35,9 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
     // Delete Recipe on RecipeDetailActivity
     fun deleteCurrentRecipe(){
         val deleteBasic = recipeBasic.value?: return
+        val deleteIngredient = ingredients.value?: return
         viewModelScope.launch {
-            recipeRepository.deleteRecipe(deleteBasic)
+            recipeRepository.deleteRecipe(deleteBasic, deleteIngredient)
         }
     }
 
