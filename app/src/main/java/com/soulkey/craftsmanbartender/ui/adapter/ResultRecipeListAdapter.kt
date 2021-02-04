@@ -1,16 +1,20 @@
 package com.soulkey.craftsmanbartender.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ItemResultRecipeListBinding
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
+import kotlinx.android.synthetic.main.dialog_recipe_hint.*
 
-class ResultRecipeListAdapter : ListAdapter<RecipeWithIngredient, ResultRecipeListAdapter.ResultRecipeListViewHolder>(object : DiffUtil.ItemCallback<RecipeWithIngredient>(){
+class ResultRecipeListAdapter(private val context: Context) : ListAdapter<RecipeWithIngredient, ResultRecipeListAdapter.ResultRecipeListViewHolder>(object : DiffUtil.ItemCallback<RecipeWithIngredient>(){
     override fun areItemsTheSame(
         oldItem: RecipeWithIngredient,
         newItem: RecipeWithIngredient
@@ -33,6 +37,20 @@ class ResultRecipeListAdapter : ListAdapter<RecipeWithIngredient, ResultRecipeLi
             binding.tvRecipeName.text = item.basic.name
             binding.root.setOnClickListener {
                 // TODO Show Recipe Data
+                //show recipe hint
+                MaterialDialog(context)
+                        .title(text = item.basic.name)
+                        .customView(R.layout.dialog_recipe_hint, scrollable = true, horizontalPadding = true)
+                        .apply {
+                            val ingredientAdapter = IngredientListAdapter()
+                            tv_making_style.text = item.basic.combineMakingStylesToString()
+                            tv_glass.text = item.basic.glass
+                            tv_garnish.text = item.basic.garnish
+                            recycler_recipe_ingredients.adapter = ingredientAdapter
+                            ingredientAdapter.submitList(item.ingredients)
+                        }
+                        .positiveButton()
+                        .show()
             }
         }
     }

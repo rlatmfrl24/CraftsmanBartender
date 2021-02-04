@@ -20,8 +20,6 @@ class MockTestViewModel(private val recipeRepository: RecipeRepository) : ViewMo
 
     val skipCocktail = mutableListOf<RecipeWithIngredient>()
     val recipeCheckCocktail = mutableListOf<RecipeWithIngredient>()
-    val incompleteCocktail = mutableListOf<RecipeWithIngredient>()
-    val completeCocktail = mutableListOf<RecipeWithIngredient>()
 
     val isTestFinished = MediatorLiveData<Boolean>().apply {
         addSourceList(
@@ -48,6 +46,8 @@ class MockTestViewModel(private val recipeRepository: RecipeRepository) : ViewMo
             isSecondRecipeComplete.value = false
             isThirdRecipeComplete.value = false
             isTestFinished.value = false
+            skipCocktail.clear()
+            recipeCheckCocktail.clear()
             testRecipes = recipeRepository.getAllRecipes().filter { it.basic.applyMockTest }.toMutableList()
             Timber.v("diver:/ $testRecipes")
             assignAllRecipe()

@@ -16,8 +16,8 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class TestResultFragment : Fragment() {
     private lateinit var binding: FragmentTestResultBinding
     private val mockTestViewModel : MockTestViewModel by sharedViewModel()
-    private val skippedRecipesAdapter = ResultRecipeListAdapter()
-    private val hintCheckedRecipesAdapter = ResultRecipeListAdapter()
+    private val skippedRecipesAdapter by lazy { ResultRecipeListAdapter(requireContext()) }
+    private val hintCheckedRecipesAdapter by lazy { ResultRecipeListAdapter(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,10 +38,10 @@ class TestResultFragment : Fragment() {
         skippedRecipesAdapter.submitList(mockTestViewModel.skipCocktail)
         hintCheckedRecipesAdapter.submitList(mockTestViewModel.recipeCheckCocktail)
         if (mockTestViewModel.skipCocktail.isNullOrEmpty()) {
-            binding.recyclerSkippedRecipes.visibility = View.GONE
+            binding.cardSkippedRecipes.visibility = View.GONE
         }
         if (mockTestViewModel.recipeCheckCocktail.isNullOrEmpty()) {
-            binding.recyclerHintCheckedRecipes.visibility = View.GONE
+            binding.cardHintCheckedRecipes.visibility = View.GONE
         }
 
         // Test Recipe Name Setting
@@ -77,4 +77,5 @@ class TestResultFragment : Fragment() {
             activity?.finish()
         }
     }
+
 }

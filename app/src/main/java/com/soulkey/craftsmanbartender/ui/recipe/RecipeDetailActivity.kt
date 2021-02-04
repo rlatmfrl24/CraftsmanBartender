@@ -3,6 +3,7 @@ package com.soulkey.craftsmanbartender.ui.recipe
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.afollestad.materialdialogs.MaterialDialog
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ActivityRecipeDetailBinding
 import com.soulkey.craftsmanbartender.lib.common.BaseActivity
@@ -47,9 +48,17 @@ class RecipeDetailActivity : BaseActivity() {
         binding.toolbarRecipeDetail.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.menu_recipe_detail_delete -> {
+
                     //Recipe Delete
-                    recipeViewModel.deleteCurrentRecipe()
-                    finish()
+                    MaterialDialog(this)
+                        .title(text = "Recipe Delete")
+                        .message(text = "정말로 해당 레시피를 삭제하시겠습니까?")
+                        .positiveButton {
+                            recipeViewModel.deleteCurrentRecipe()
+                            finish()
+                        }
+                        .negativeButton()
+                        .show()
                     true
                 }
                 else -> false

@@ -26,12 +26,13 @@ class MockTestFragment : Fragment() {
     companion object {
         const val MINUTE_UNIT = 1000 * 60
         const val SECOND_UNIT = 1000
+        const val TEST_TIME = 7L
     }
 
     private lateinit var binding: FragmentMockTestBinding
     private val mockTestViewModel : MockTestViewModel by sharedViewModel()
     private val timer: CountDownTimer by lazy {
-        object : CountDownTimer((7L * MINUTE_UNIT), 1) {
+        object : CountDownTimer((TEST_TIME * MINUTE_UNIT), 1) {
             override fun onTick(millisUntilFinished: Long) {
                 val leftMinute = (millisUntilFinished / MINUTE_UNIT).toString()
                 val leftSecond = ((millisUntilFinished % MINUTE_UNIT) / SECOND_UNIT).toString().padStart(2, '0')
@@ -55,12 +56,11 @@ class MockTestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = mockTestViewModel
-
-//        mockTestViewModel.initializeTestRecipe()
         timer.start()
 
         mockTestViewModel.isTestFinished.observe(viewLifecycleOwner, Observer {
             if (it) {
+                timer.cancel()
                 // Go to Result Fragment
                 MaterialDialog(requireContext())
                     .cancelOnTouchOutside(false)
@@ -103,12 +103,19 @@ class MockTestFragment : Fragment() {
     }
 
     private fun rerollRecipe(target: MutableLiveData<RecipeWithIngredient>) {
-        if (mockTestViewModel.testRecipes.isNotEmpty()){
-            mockTestViewModel.skipCocktail.add(target.value!!)
-            target.value = mockTestViewModel.assignRecipe()
-        } else {
-            Toast.makeText(context, "더이상 Recipe 를 교체할 수 없습니다", Toast.LENGTH_SHORT).show()
-        }
+        MaterialDialog(requireContext())
+                .title(text = "Skip Recipe")
+                .message(R.string.string_reroll_recipe_msg)
+                .positiveButton{
+                    if (mockTestViewModel.testRecipes.isNotEmpty()){
+                        mockTestViewModel.skipCocktail.add(target.value!!)
+                        target.value = mockTestViewModel.assignRecipe()
+                    } else {
+                        Toast.makeText(context, "더이상 Recipe 를 교체할 수 없습니다", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .negativeButton()
+                .show()
     }
 
     private fun linkToggleWithData(data: MutableLiveData<Boolean>, view: ImageView) {
