@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "395541846251",
+    "project_id": "craftsmanbartender",
+    "storage_bucket": "craftsmanbartender.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395541846251:android:7fb357e26a16d11963c6ae",
+        "android_client_info": {
+          "package_name": "com.soulkey.craftsmanbartender"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395541846251-pgj4sp2qrqu91lhiaf5akhkrq61sndas.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLPuA0LPfyO2vCxMzBctlIRoqq9ZKMe0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395541846251-pgj4sp2qrqu91lhiaf5akhkrq61sndas.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

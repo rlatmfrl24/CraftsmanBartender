@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_mock_test"
+    app:startDestination="@id/testIntroFragment">
+
+    <fragment
+        android:id="@+id/testIntroFragment"
+        android:name="com.soulkey.craftsmanbartender.ui.mocktest.TestIntroFragment"
+        android:label="TestIntroFragment"
+        tools:layout="@layout/fragment_mock_test_intro">
+        <action
+            android:id="@+id/action_testIntroFragment_to_countDownFragment"
+            app:destination="@id/countDownFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countDownFragment"
+        android:name="com.soulkey.craftsmanbartender.ui.mocktest.CountDownFragment"
+        android:label="CountDownFragment"
+        tools:layout="@layout/fragment_count_down">
+        <action
+            android:id="@+id/action_countDownFragment_to_mockTestFragment"
+            app:destination="@id/mockTestFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/mockTestFragment"
+        android:name="com.soulkey.craftsmanbartender.ui.mocktest.MockTestFragment"
+        android:label="MockTestFragment"
+        tools:layout="@layout/fragment_mock_test">
+        <action
+            android:id="@+id/action_mockTestFragment_to_testResultFragment"
+            app:destination="@id/testResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testResultFragment"
+        android:name="com.soulkey.craftsmanbartender.ui.mocktest.TestResultFragment"
+        android:label="TestResultFragment"
+        tools:layout="@layout/fragment_test_result">
+        <action
+            android:id="@+id/action_testResultFragment_to_countDownFragment"
+            app:destination="@id/countDownFragment" />
+    </fragment>
+</navigation>

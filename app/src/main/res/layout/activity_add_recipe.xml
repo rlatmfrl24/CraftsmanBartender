@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.recipe.AddRecipeActivity">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.soulkey.craftsmanbartender.ui.recipe.RecipeViewModel" />
+        <variable
+            name="adapter"
+            type="com.soulkey.craftsmanbartender.ui.adapter.AddRecipeIngredientListAdapter" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:title="Add New Recipe"
+                app:titleTextAppearance="@style/Theme.CraftsmanBartender.ToolbarTextAppearance"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/container_recipe_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    app:layout_constraintVertical_chainStyle="spread_inside"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_add_btn">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_recipe_name"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:hintTextColor="@color/orange_500"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/string_name"
+                        app:errorContentDescription="Please Insert Recipe's Name"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.recipeName}"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_recipe_glass"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:hintTextColor="@color/orange_500"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/glass_header"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/til_recipe_name">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.recipeGlass}"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_recipe_garnish"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:hintTextColor="@color/orange_500"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/garnish_header"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/til_recipe_glass">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.recipeGarnish}"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_recipe_primary_making_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/string_primary_making_style"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:layout_constraintTop_toBottomOf="@id/til_recipe_garnish">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/spinner_primary_making_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            text="@={viewModel.primaryMakingStyle}"
+                            android:inputType="none"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_recipe_secondary_making_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/string_secondary_making_style"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:layout_constraintTop_toBottomOf="@id/til_recipe_primary_making_style">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/spinner_secondary_making_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            text="@={viewModel.secondaryMakingStyle}"
+                            android:inputType="none"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tv_header_ingredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/string_ingredients"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/spoqa_han_sans_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_recipe_secondary_making_style"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/container_error_msg_ingredient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_header_ingredients"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_header_ingredients">
+                        <ImageView
+                            android:id="@+id/iv_error_ingredient"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginEnd="3dp"
+                            android:src="@drawable/ic_error_red_24px"
+                            app:layout_constraintTop_toTopOf="@id/tv_error_msg_ingredient"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_error_msg_ingredient"
+                            app:layout_constraintEnd_toStartOf="@id/tv_error_msg_ingredient"/>
+
+                        <TextView
+                            android:id="@+id/tv_error_msg_ingredient"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="You must insert one Ingredient at least"
+                            android:textColor="@color/red_600"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_add_recipe_ingredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:setAdapter="@{adapter}"
+                        app:layout_constraintTop_toBottomOf="@id/tv_header_ingredients"
+                        tools:listitem="@layout/item_add_recipe_ingredient_list"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/container_add_ingredient"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintTop_toBottomOf="@id/recycler_add_recipe_ingredients">
+                        
+                        <ImageView
+                            android:id="@+id/iv_add_ingredient"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_add_24px"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/string_add_ingredient"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/spoqa_han_sans_bold"
+                            app:layout_constraintTop_toTopOf="@id/iv_add_ingredient"
+                            app:layout_constraintBottom_toBottomOf="@id/iv_add_ingredient"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/iv_add_ingredient"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkbox_apply_mock_test"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="true"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/string_apply_to_mock_test"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/spoqa_han_sans_bold"
+                        android:checked="@={viewModel.applyMockTest}"
+                        app:layout_constraintTop_toBottomOf="@id/container_add_ingredient" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_add_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/string_create"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/spoqa_han_sans_bold"
+                    android:background="@color/orange_300"
+                    android:paddingVertical="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/container_recipe_form"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
