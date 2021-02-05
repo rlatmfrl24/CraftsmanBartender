@@ -25,6 +25,18 @@ interface RecipeDao {
         deleteIngredients(ingredients)
     }
 
+    @Query("DELETE FROM Recipe")
+    suspend fun clearRecipeTable()
+
+    @Query("DELETE FROM ingredients")
+    suspend fun clearIngredientTable()
+
+    @Transaction
+    suspend fun clearAll(){
+        clearRecipeTable()
+        clearIngredientTable()
+    }
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipe(recipe: Recipe) : Long
 

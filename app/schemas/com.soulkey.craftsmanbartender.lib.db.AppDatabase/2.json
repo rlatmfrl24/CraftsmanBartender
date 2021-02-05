@@ -1,0 +1,114 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "0e775c3ca04cbfbc4e0dba037266e7c6",
+    "entities": [
+      {
+        "tableName": "Recipe",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`recipeId` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `primaryMakingStyle` TEXT NOT NULL, `secondaryMakingStyle` TEXT, `glass` TEXT NOT NULL, `garnish` TEXT, `applyMockTest` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "recipeId",
+            "columnName": "recipeId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "primaryMakingStyle",
+            "columnName": "primaryMakingStyle",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "secondaryMakingStyle",
+            "columnName": "secondaryMakingStyle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "glass",
+            "columnName": "glass",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "garnish",
+            "columnName": "garnish",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "applyMockTest",
+            "columnName": "applyMockTest",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "recipeId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ingredients",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ingredientId` INTEGER PRIMARY KEY AUTOINCREMENT, `recipeBasicId` INTEGER, `name` TEXT NOT NULL, `amount` REAL, `unit` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "ingredientId",
+            "columnName": "ingredientId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "recipeBasicId",
+            "columnName": "recipeBasicId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "unit",
+            "columnName": "unit",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "ingredientId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0e775c3ca04cbfbc4e0dba037266e7c6')"
+    ]
+  }
+}

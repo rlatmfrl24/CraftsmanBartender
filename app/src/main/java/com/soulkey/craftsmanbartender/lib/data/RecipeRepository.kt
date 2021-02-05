@@ -12,4 +12,5 @@ interface RecipeRepository {
     suspend fun applyRecipeToMockTest(recipe: Recipe, value: Boolean)
     suspend fun getAllRecipes(): List<RecipeWithIngredient>
     fun getRecipes(): LiveData<List<RecipeWithIngredient>>
+    suspend fun loadBaseRecipes()
 }

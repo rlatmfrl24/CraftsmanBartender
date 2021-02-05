@@ -3,6 +3,8 @@ package com.soulkey.craftsmanbartender.lib.di
 import android.app.Application
 import androidx.room.Room
 import com.facebook.stetho.Stetho
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.soulkey.craftsmanbartender.lib.data.RecipeRepository
 import com.soulkey.craftsmanbartender.lib.data.RecipeRepositoryImpl
 import com.soulkey.craftsmanbartender.lib.db.AppDatabase
@@ -23,8 +25,11 @@ class App : Application() {
                 .allowMainThreadQueries()
                 .build()
         }
+        single {
+            Firebase.firestore
+        }
         single { get<AppDatabase>().recipeDao() }
-        single<RecipeRepository> { RecipeRepositoryImpl(get()) }
+        single<RecipeRepository> { RecipeRepositoryImpl(get(), get()) }
 
         viewModel { RecipeViewModel(get()) }
         viewModel { MockTestViewModel(get()) }

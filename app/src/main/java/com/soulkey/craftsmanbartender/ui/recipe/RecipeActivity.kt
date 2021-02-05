@@ -22,6 +22,18 @@ class RecipeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding.adapter = recipeAdapter
 
+        // Toolbar Menu Action
+        binding.toolbarRecipe.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.menu_recipe_reset -> {
+                    // Load Base Recipes from Firestore
+                    recipeViewModel.resetRecipeList()
+                    true
+                }
+                else -> false
+            }
+        }
+
         // Apply Recipes to Recyclerview
         recipeViewModel.recipes.observe(this, Observer{ list->
             recipeAdapter.submitList(list)

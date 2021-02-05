@@ -20,9 +20,11 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_recipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:title="Recipes"
+                app:menu="@menu/menu_recipe_app_bar"
                 app:titleTextAppearance="@style/Theme.CraftsmanBartender.ToolbarTextAppearance">
 
             </com.google.android.material.appbar.MaterialToolbar>
