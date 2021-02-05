@@ -11,6 +11,7 @@ interface RecipeRepository {
     suspend fun deleteRecipe(recipe: Recipe, ingredients: List<Ingredient>)
     suspend fun applyRecipeToMockTest(recipe: Recipe, value: Boolean)
     suspend fun getAllRecipes(): List<RecipeWithIngredient>
-    fun getRecipes(): LiveData<List<RecipeWithIngredient>>
     suspend fun loadBaseRecipes()
+    fun getRecipes(): LiveData<List<RecipeWithIngredient>>
+    fun uploadRecipe(recipe: Recipe, ingredients: List<Ingredient>)
 }

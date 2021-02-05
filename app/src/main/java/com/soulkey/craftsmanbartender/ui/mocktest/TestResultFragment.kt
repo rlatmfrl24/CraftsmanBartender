@@ -50,19 +50,19 @@ class TestResultFragment : Fragment() {
         binding.tvThirdRecipeName.text = mockTestViewModel.thirdRecipe.value?.basic?.name
 
         // Test Recipes whether it was completed
-        mockTestViewModel.isFirstRecipeComplete.observe(viewLifecycleOwner, Observer {
+        mockTestViewModel.isFirstRecipeComplete.observe(viewLifecycleOwner, {
             when(it) {
                 true -> binding.ivFirstRecipeIsCompleted.setImageResource(R.drawable.ic_check_circle_24px)
                 false -> binding.ivFirstRecipeIsCompleted.setImageResource(R.drawable.ic_circle_24px)
             }
         })
-        mockTestViewModel.isSecondRecipeComplete.observe(viewLifecycleOwner, Observer {
+        mockTestViewModel.isSecondRecipeComplete.observe(viewLifecycleOwner, {
             when(it) {
                 true -> binding.ivSecondRecipeIsCompleted.setImageResource(R.drawable.ic_check_circle_24px)
                 false -> binding.ivSecondRecipeIsCompleted.setImageResource(R.drawable.ic_circle_24px)
             }
         })
-        mockTestViewModel.isThirdRecipeComplete.observe(viewLifecycleOwner, Observer {
+        mockTestViewModel.isThirdRecipeComplete.observe(viewLifecycleOwner, {
             when(it) {
                 true -> binding.ivThirdRecipeIsCompleted.setImageResource(R.drawable.ic_check_circle_24px)
                 false -> binding.ivThirdRecipeIsCompleted.setImageResource(R.drawable.ic_circle_24px)

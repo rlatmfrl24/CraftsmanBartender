@@ -61,9 +61,30 @@ class RecipeRepositoryImpl(private val recipeDao : RecipeDao, private val firest
                     }
                 Pair(recipeBasic, ingredientList)
             }.map {
-                Timber.v("diver:/ $it")
                 createRecipe(it.first, it.second)
             }
         }
+    }
+
+    override fun uploadRecipe(recipe: Recipe, ingredients: List<Ingredient>) {
+        val ingredientList = ingredients.map {
+            hashMapOf(
+                "name" to it.name,
+                "amount" to it.amount,
+                "unit" to it.unit
+            )
+        }
+
+        firestore.collection("baseRecipe").document(recipe.name)
+            .set(
+                hashMapOf(
+                    "name" to recipe.name,
+                    "glass" to recipe.glass,
+                    "garnish" to recipe.garnish,
+                    "primaryMakingStyle" to recipe.primaryMakingStyle.name,
+                    "secondaryMakingStyle" to recipe.secondaryMakingStyle?.name,
+                    "ingredients" to ingredientList
+                )
+            )
     }
 }

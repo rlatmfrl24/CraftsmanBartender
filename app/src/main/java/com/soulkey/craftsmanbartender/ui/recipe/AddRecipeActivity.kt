@@ -26,7 +26,7 @@ class AddRecipeActivity : BaseActivity() {
         AddRecipeIngredientListAdapter(recipeViewModel)
     }
     private val binding : ActivityAddRecipeBinding by lazy {
-        DataBindingUtil.setContentView<ActivityAddRecipeBinding>(this, R.layout.activity_add_recipe)
+        DataBindingUtil.setContentView(this, R.layout.activity_add_recipe)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

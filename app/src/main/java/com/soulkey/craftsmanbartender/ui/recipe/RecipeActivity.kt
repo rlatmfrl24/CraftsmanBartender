@@ -15,7 +15,7 @@ class RecipeActivity : BaseActivity() {
     private val recipeAdapter = RecipeListAdapter()
     private val recipeViewModel: RecipeViewModel by viewModel()
     private val binding : ActivityRecipeBinding by lazy {
-        DataBindingUtil.setContentView<ActivityRecipeBinding>(this, R.layout.activity_recipe)
+        DataBindingUtil.setContentView(this, R.layout.activity_recipe)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +35,7 @@ class RecipeActivity : BaseActivity() {
         }
 
         // Apply Recipes to Recyclerview
-        recipeViewModel.recipes.observe(this, Observer{ list->
+        recipeViewModel.recipes.observe(this, { list->
             recipeAdapter.submitList(list)
         })
 

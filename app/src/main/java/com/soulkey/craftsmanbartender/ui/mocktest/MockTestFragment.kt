@@ -155,7 +155,7 @@ class MockTestFragment : Fragment() {
                 //show recipe hint
                 MaterialDialog(requireContext())
                     .title(text = recipe.basic.name)
-                    .customView(R.layout.dialog_recipe_hint, scrollable = true, horizontalPadding = true)
+                    .customView(view=dialogBinding.root, scrollable = true, horizontalPadding = true)
                     .apply {
                         val ingredientAdapter = IngredientListAdapter()
                         dialogBinding.tvMakingStyle.text = recipe.basic.combineMakingStylesToString()

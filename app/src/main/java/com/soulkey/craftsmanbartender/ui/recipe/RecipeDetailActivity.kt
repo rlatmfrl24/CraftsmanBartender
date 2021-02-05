@@ -1,6 +1,7 @@
 package com.soulkey.craftsmanbartender.ui.recipe
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
@@ -16,7 +17,7 @@ class RecipeDetailActivity : BaseActivity() {
     private val recipeViewModel : RecipeViewModel by viewModel()
     private val ingredientAdapter = IngredientListAdapter()
     private val binding: ActivityRecipeDetailBinding by lazy {
-        DataBindingUtil.setContentView<ActivityRecipeDetailBinding>(this, R.layout.activity_recipe_detail)
+        DataBindingUtil.setContentView(this, R.layout.activity_recipe_detail)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,7 @@ class RecipeDetailActivity : BaseActivity() {
         }
 
         // Set Ingredients to Recyclerview
-        recipeViewModel.ingredients.observe(this, Observer { list ->
+        recipeViewModel.ingredients.observe(this, { list ->
             ingredientAdapter.submitList(list)
         })
 
@@ -47,8 +48,11 @@ class RecipeDetailActivity : BaseActivity() {
         // Toolbar - Delete Button Action
         binding.toolbarRecipeDetail.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId) {
+                R.id.menu_recipe_detail_update -> {
+                    Toast.makeText(this, "해당 기능은 준비중입니다", Toast.LENGTH_SHORT).show()
+                    true
+                }
                 R.id.menu_recipe_detail_delete -> {
-
                     //Recipe Delete
                     MaterialDialog(this)
                         .title(text = "Recipe Delete")

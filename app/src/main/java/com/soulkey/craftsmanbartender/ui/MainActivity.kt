@@ -11,7 +11,7 @@ import com.soulkey.craftsmanbartender.ui.recipe.RecipeActivity
 
 class MainActivity : BaseActivity() {
     private val binding: ActivityMainBinding by lazy {
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

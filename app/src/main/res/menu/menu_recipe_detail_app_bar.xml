@@ -4,9 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_recipe_detail_update"
+        android:title="UPDATE"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/menu_recipe_detail_delete"
         android:title="DELETE"
         android:contentDescription="Recipe Detail Item Delete"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
 
 </menu>
