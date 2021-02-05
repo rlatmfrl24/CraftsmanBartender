@@ -2,7 +2,6 @@ package com.soulkey.craftsmanbartender.lib.di
 
 import android.app.Application
 import androidx.room.Room
-import com.facebook.stetho.Stetho
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.soulkey.craftsmanbartender.lib.data.RecipeRepository
@@ -38,7 +37,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        Stetho.initializeWithDefaults(this)
         startKoin {
             androidLogger()
             androidContext(this@App)

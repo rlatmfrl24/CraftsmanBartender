@@ -3,6 +3,7 @@ package com.soulkey.craftsmanbartender.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.soulkey.craftsmanbartender.R
+import com.soulkey.craftsmanbartender.databinding.DialogRecipeHintBinding
 import com.soulkey.craftsmanbartender.databinding.ItemResultRecipeListBinding
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
-import kotlinx.android.synthetic.main.dialog_recipe_hint.*
 
 class ResultRecipeListAdapter(private val context: Context) : ListAdapter<RecipeWithIngredient, ResultRecipeListAdapter.ResultRecipeListViewHolder>(object : DiffUtil.ItemCallback<RecipeWithIngredient>(){
     override fun areItemsTheSame(
@@ -36,17 +37,25 @@ class ResultRecipeListAdapter(private val context: Context) : ListAdapter<Recipe
         fun bind(item: RecipeWithIngredient) {
             binding.tvRecipeName.text = item.basic.name
             binding.root.setOnClickListener {
-                // TODO Show Recipe Data
+
                 //show recipe hint
+                val dialogBinding: DialogRecipeHintBinding =
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(context),
+                        R.layout.dialog_recipe_hint,
+                        null,
+                        false
+                    )
+
                 MaterialDialog(context)
                         .title(text = item.basic.name)
-                        .customView(R.layout.dialog_recipe_hint, scrollable = true, horizontalPadding = true)
+                        .customView(view = dialogBinding.root, scrollable = true, horizontalPadding = true)
                         .apply {
                             val ingredientAdapter = IngredientListAdapter()
-                            tv_making_style.text = item.basic.combineMakingStylesToString()
-                            tv_glass.text = item.basic.glass
-                            tv_garnish.text = item.basic.garnish
-                            recycler_recipe_ingredients.adapter = ingredientAdapter
+                            dialogBinding.tvMakingStyle.text = item.basic.combineMakingStylesToString()
+                            dialogBinding.tvGlass.text = item.basic.glass
+                            dialogBinding.tvGarnish.text = item.basic.garnish
+                            dialogBinding.recyclerRecipeIngredients.adapter = ingredientAdapter
                             ingredientAdapter.submitList(item.ingredients)
                         }
                         .positiveButton()
