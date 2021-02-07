@@ -14,6 +14,7 @@ import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.DialogRecipeHintBinding
 import com.soulkey.craftsmanbartender.databinding.ItemResultRecipeListBinding
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
+import com.soulkey.craftsmanbartender.lib.view.ViewUtil
 
 class ResultRecipeListAdapter(private val context: Context) : ListAdapter<RecipeWithIngredient, ResultRecipeListAdapter.ResultRecipeListViewHolder>(object : DiffUtil.ItemCallback<RecipeWithIngredient>(){
     override fun areItemsTheSame(
@@ -37,29 +38,7 @@ class ResultRecipeListAdapter(private val context: Context) : ListAdapter<Recipe
         fun bind(item: RecipeWithIngredient) {
             binding.tvRecipeName.text = item.basic.name
             binding.root.setOnClickListener {
-
-                //show recipe hint
-                val dialogBinding: DialogRecipeHintBinding =
-                    DataBindingUtil.inflate(
-                        LayoutInflater.from(context),
-                        R.layout.dialog_recipe_hint,
-                        null,
-                        false
-                    )
-
-                MaterialDialog(context)
-                        .title(text = item.basic.name)
-                        .customView(view = dialogBinding.root, scrollable = true, horizontalPadding = true)
-                        .apply {
-                            val ingredientAdapter = IngredientListAdapter()
-                            dialogBinding.tvMakingStyle.text = item.basic.combineMakingStylesToString()
-                            dialogBinding.tvGlass.text = item.basic.glass
-                            dialogBinding.tvGarnish.text = item.basic.garnish
-                            dialogBinding.recyclerRecipeIngredients.adapter = ingredientAdapter
-                            ingredientAdapter.submitList(item.ingredients)
-                        }
-                        .positiveButton()
-                        .show()
+                ViewUtil.makeRecipeDialog(context, item).show()
             }
         }
     }
