@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -14,14 +13,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.DialogRecipeHintBinding
 import com.soulkey.craftsmanbartender.databinding.FragmentMockTestBinding
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
-import com.soulkey.craftsmanbartender.ui.adapter.IngredientListAdapter
+import com.soulkey.craftsmanbartender.lib.view.ViewUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MockTestFragment : Fragment() {
@@ -60,7 +57,7 @@ class MockTestFragment : Fragment() {
         binding.viewModel = mockTestViewModel
         timer.start()
 
-        mockTestViewModel.isTestFinished.observe(viewLifecycleOwner, Observer {
+        mockTestViewModel.isTestFinished.observe(viewLifecycleOwner, {
             if (it) {
                 timer.cancel()
                 // Go to Result Fragment
@@ -143,29 +140,8 @@ class MockTestFragment : Fragment() {
                 if (!mockTestViewModel.recipeCheckCocktail.contains(recipe)) {
                     mockTestViewModel.recipeCheckCocktail.add(recipe)
                 }
-
-                val dialogBinding: DialogRecipeHintBinding =
-                    DataBindingUtil.inflate(
-                        LayoutInflater.from(context),
-                        R.layout.dialog_recipe_hint,
-                        null,
-                        false
-                    )
-
                 //show recipe hint
-                MaterialDialog(requireContext())
-                    .title(text = recipe.basic.name)
-                    .customView(view=dialogBinding.root, scrollable = true, horizontalPadding = true)
-                    .apply {
-                        val ingredientAdapter = IngredientListAdapter()
-                        dialogBinding.tvMakingStyle.text = recipe.basic.combineMakingStylesToString()
-                        dialogBinding.tvGlass.text = recipe.basic.glass
-                        dialogBinding.tvGarnish.text = recipe.basic.garnish
-                        dialogBinding.recyclerRecipeIngredients.adapter = ingredientAdapter
-                        ingredientAdapter.submitList(recipe.ingredients)
-                    }
-                    .positiveButton()
-                    .show()
+                ViewUtil.makeRecipeDialog(requireContext(), recipe).show()
             }
             .negativeButton {}
             .show()
