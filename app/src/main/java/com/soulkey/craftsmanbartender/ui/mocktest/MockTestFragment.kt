@@ -118,7 +118,7 @@ class MockTestFragment : Fragment() {
     }
 
     private fun linkToggleWithData(data: MutableLiveData<Boolean>, view: ImageView) {
-        data.observe(viewLifecycleOwner, Observer { isCompleted->
+        data.observe(viewLifecycleOwner, { isCompleted->
             when(isCompleted) {
                 true -> view.setImageResource(R.drawable.ic_check_circle_24px)
                 false -> view.setImageResource(R.drawable.ic_circle_24px)

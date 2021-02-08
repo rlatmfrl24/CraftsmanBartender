@@ -2,12 +2,14 @@ package com.soulkey.craftsmanbartender.ui.recipe
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ActivityRecipeBinding
 import com.soulkey.craftsmanbartender.lib.common.BaseActivity
 import com.soulkey.craftsmanbartender.ui.adapter.RecipeListAdapter
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RecipeActivity : BaseActivity() {
@@ -27,7 +29,11 @@ class RecipeActivity : BaseActivity() {
             when(it.itemId) {
                 R.id.menu_recipe_reset -> {
                     // Load Base Recipes from Firestore
-                    recipeViewModel.resetRecipeList()
+                    lifecycleScope.launch {
+                        binding.progressbarRecipeLoading.visibility = View.VISIBLE
+                        recipeViewModel.resetRecipeList()
+                        binding.progressbarRecipeLoading.visibility = View.GONE
+                    }
                     true
                 }
                 else -> false

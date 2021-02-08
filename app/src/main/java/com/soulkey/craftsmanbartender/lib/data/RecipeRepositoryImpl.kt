@@ -36,33 +36,31 @@ class RecipeRepositoryImpl(private val recipeDao : RecipeDao, private val firest
     }
 
     override suspend fun loadBaseRecipes() {
-        withContext(Dispatchers.IO) {
-            recipeDao.clearAll()
-            firestore.collection("baseRecipe").get().await().map { documentSnapshot ->
-                val recipeBasic = Recipe(
-                    recipeId = null,
-                    name = documentSnapshot["name"] as String,
-                    glass = documentSnapshot["glass"] as String,
-                    garnish = documentSnapshot["garnish"] as String,
-                    primaryMakingStyle = MakingStyle.valueOf(documentSnapshot["primaryMakingStyle"] as String),
-                    secondaryMakingStyle = MakingStyle.valueOf(documentSnapshot["secondaryMakingStyle"] as String),
-                    applyMockTest = true
-                )
-                val ingredientList =
-                    (documentSnapshot["ingredients"] as List<*>).map { ingredient ->
-                        ingredient as Map<*, *>
-                        Ingredient(
-                            ingredientId = null,
-                            recipeBasicId = null,
-                            name = ingredient["name"] as String,
-                            amount = (ingredient["amount"] as Double).toFloat(),
-                            unit = ingredient["unit"] as String
-                        )
-                    }
-                Pair(recipeBasic, ingredientList)
-            }.map {
-                createRecipe(it.first, it.second)
-            }
+        recipeDao.clearAll()
+        firestore.collection("baseRecipe").get().await().map { documentSnapshot ->
+            val recipeBasic = Recipe(
+                recipeId = null,
+                name = documentSnapshot["name"] as String,
+                glass = documentSnapshot["glass"] as String,
+                garnish = documentSnapshot["garnish"] as String,
+                primaryMakingStyle = MakingStyle.valueOf(documentSnapshot["primaryMakingStyle"] as String),
+                secondaryMakingStyle = MakingStyle.valueOf(documentSnapshot["secondaryMakingStyle"] as String),
+                applyMockTest = true
+            )
+            val ingredientList =
+                (documentSnapshot["ingredients"] as List<*>).map { ingredient ->
+                    ingredient as Map<*, *>
+                    Ingredient(
+                        ingredientId = null,
+                        recipeBasicId = null,
+                        name = ingredient["name"] as String,
+                        amount = (ingredient["amount"] as Double).toFloat(),
+                        unit = ingredient["unit"] as String
+                    )
+                }
+            Pair(recipeBasic, ingredientList)
+        }.map {
+            createRecipe(it.first, it.second)
         }
     }
 

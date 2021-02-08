@@ -32,10 +32,8 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
         ingredients.value = recipeWithIngredient.ingredients.toMutableList()
     }
 
-    fun resetRecipeList() {
-        viewModelScope.launch {
-            recipeRepository.loadBaseRecipes()
-        }
+    suspend fun resetRecipeList() {
+        recipeRepository.loadBaseRecipes()
     }
 
     // Delete Recipe on RecipeDetailActivity
