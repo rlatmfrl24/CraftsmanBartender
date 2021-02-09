@@ -8,7 +8,6 @@ import com.soulkey.craftsmanbartender.lib.model.Recipe
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewModel(){
     // for AddRecipeActivity
@@ -20,17 +19,12 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
     val applyMockTest: MutableLiveData<Boolean> = MutableLiveData(true)
 
     // for RecipeDetailActivity
-    val recipeBasic: MutableLiveData<Recipe> = MutableLiveData()
+    val currentID = MutableLiveData<Long>()
+    val currentRecipeWithIngredient: LiveData<RecipeWithIngredient> = Transformations.map(currentID) { recipeRepository.getRecipeById(it) }
     val ingredients : MutableLiveData<MutableList<Ingredient>> = MutableLiveData(mutableListOf())
 
     // for RecipeActivity
     val recipes : LiveData<List<RecipeWithIngredient>> = recipeRepository.getRecipes()
-
-    // Initialize when RecipeDetailActivity-onCreate
-    fun initializeRecipe(recipeWithIngredient: RecipeWithIngredient) {
-        recipeBasic.value = recipeWithIngredient.basic
-        ingredients.value = recipeWithIngredient.ingredients.toMutableList()
-    }
 
     suspend fun resetRecipeList() {
         recipeRepository.loadBaseRecipes()
@@ -38,8 +32,8 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
 
     // Delete Recipe on RecipeDetailActivity
     fun deleteCurrentRecipe(){
-        val deleteBasic = recipeBasic.value?: return
-        val deleteIngredient = ingredients.value?: return
+        val deleteBasic = currentRecipeWithIngredient.value?.basic?: return
+        val deleteIngredient = currentRecipeWithIngredient.value?.ingredients?: return
         viewModelScope.launch {
             recipeRepository.deleteRecipe(deleteBasic, deleteIngredient)
         }
@@ -62,7 +56,7 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
 
     // Update Recipe whether Apply to Mock Test
     fun setApplyToMockTest(value: Boolean) {
-        val basicToApply = recipeBasic.value?: return
+        val basicToApply = currentRecipeWithIngredient.value?.basic?: return
         viewModelScope.launch {
             recipeRepository.applyRecipeToMockTest(basicToApply, value)
         }
@@ -75,7 +69,7 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
         val primaryMakingStyle = primaryMakingStyle.value?: return
         val ingredients = ingredients.value?: return
 
-        recipeBasic.value = Recipe(
+        Recipe(
             recipeId = null,
             name = recipeName,
             glass = recipeGlass,
@@ -88,5 +82,17 @@ class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewMode
                 recipeRepository.createRecipe(recipe, ingredients)
             }
         }
+    }
+
+    suspend fun updateRecipe() {
+        val updateRecipe = currentRecipeWithIngredient.value?: return
+
+        updateRecipe.basic.name = recipeName.value!!
+        updateRecipe.basic.glass = recipeGlass.value!!
+        updateRecipe.basic.garnish = recipeGarnish.value
+        updateRecipe.basic.primaryMakingStyle = primaryMakingStyle.value!!
+        updateRecipe.basic.secondaryMakingStyle = secondaryMakingStyle.value
+        updateRecipe.basic.applyMockTest = applyMockTest.value!!
+        recipeRepository.updateRecipe(updateRecipe.basic, ingredients.value!!)
     }
 }

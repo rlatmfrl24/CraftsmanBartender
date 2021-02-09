@@ -17,6 +17,7 @@ import com.soulkey.craftsmanbartender.lib.common.BaseUtil.Companion.makeRequired
 import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.IngredientUnit
 import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.MakingStyle
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
+import com.soulkey.craftsmanbartender.lib.view.ViewUtil
 import com.soulkey.craftsmanbartender.ui.adapter.AddRecipeIngredientListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,13 +47,13 @@ class AddRecipeActivity : BaseActivity() {
         binding.tilRecipePrimaryMakingStyle.makeRequiredInRed()
 
         // Set Ingredient List
-        recipeViewModel.ingredients.observe(this, Observer {
+        recipeViewModel.ingredients.observe(this, {
             ingredientAdapter.submitList(it)
         })
 
         // Set Add Ingredient Action
         binding.containerAddIngredient.setOnClickListener {
-            addIngredientDialog().show()
+            ViewUtil.addIngredientDialog(this, recipeViewModel).show()
         }
         
         // Add Ingredient Fab Button Action
@@ -102,71 +103,5 @@ class AddRecipeActivity : BaseActivity() {
         }
 
         return isInputValid
-    }
-
-    // Add Ingredient Dialog Setting
-    private fun addIngredientDialog(): MaterialDialog {
-
-        val dialogBinding: DialogAddIngredientBinding =
-            DataBindingUtil.inflate(
-                LayoutInflater.from(this),
-                R.layout.dialog_add_ingredient,
-                null,
-                false
-            )
-
-        return MaterialDialog(this)
-                .title(text = "Add Ingredient")
-                .customView(view = dialogBinding.root, scrollable = true)
-                .noAutoDismiss()
-                .positiveButton {
-                    dialogBinding.tilIngredientName.isErrorEnabled = false
-                    dialogBinding.tilIngredientUnit.isErrorEnabled = false
-
-                    when {
-                        dialogBinding.etIngredientName.text.isNullOrBlank() -> {
-                            dialogBinding.tilIngredientName.isErrorEnabled = true
-                            dialogBinding.tilIngredientName.error = "Ingredient Name is empty"
-                        }
-                        dialogBinding.spinnerIngredientUnit.text.isNullOrBlank() -> {
-                            dialogBinding.tilIngredientUnit.isErrorEnabled = true
-                            dialogBinding.tilIngredientUnit.error = "Ingredient Unit must be selected"
-                        }
-                        else -> {
-                            val amount =
-                                    when {
-                                        dialogBinding.etIngredientAmount.text?.toString().isNullOrEmpty() -> { 0f }
-                                        dialogBinding.etIngredientAmount.text?.toString().equals("-") -> { 0f }
-                                        else -> dialogBinding.etIngredientAmount.text?.toString()?.toFloat()
-                                    }
-                            Ingredient(
-                                    ingredientId = null,
-                                    recipeBasicId = null,
-                                    name = dialogBinding.etIngredientName.text.toString(),
-                                    amount = amount,
-                                    unit = dialogBinding.spinnerIngredientUnit.text.toString()
-                            ).also { newIngredient ->
-                                recipeViewModel.addIngredient(newIngredient)
-                                it.dismiss()
-                            }
-                        }
-                    }
-                }
-                .negativeButton {
-                    it.dismiss()
-                }
-                .apply {
-                    val unitList = IngredientUnit.values().map { it.name }
-                    dialogBinding.spinnerIngredientUnit.setAdapter(ArrayAdapter(context, R.layout.item_spinner_default, unitList))
-                    dialogBinding.spinnerIngredientUnit.setOnItemClickListener { parent, _, position, _ ->
-                        val selected = (parent.getItemAtPosition(position) as String)
-                        if (selected == "fill") {
-                            dialogBinding.etIngredientAmount.isEnabled = false
-                            dialogBinding.etIngredientAmount.setText("-")
-                        } else {
-                            dialogBinding.etIngredientAmount.isEnabled = true
-                        }
-                    }
-                }
     }
 }

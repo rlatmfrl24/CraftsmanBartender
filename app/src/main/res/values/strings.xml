@@ -42,4 +42,5 @@
     <string name="string_retry">Retry</string>
     <string name="string_done">Done</string>
     <string name="string_reroll_recipe_msg">실제 시험에서는 레시피를 교체할 수 없습니다\n정말로 레시피를 교체할까요?</string>
+    <string name="string_update">Update</string>
 </resources>

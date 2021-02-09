@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CraftsmanBartender">
+        <activity android:name=".ui.recipe.UpdateRecipeActivity"></activity>
         <activity android:name=".ui.mocktest.MockTestActivity" />
         <activity android:name=".ui.recipe.RecipeDetailActivity" />
         <activity

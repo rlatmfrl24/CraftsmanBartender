@@ -32,7 +32,7 @@ class RecipeListAdapter : ListAdapter<RecipeWithIngredient, RecipeListAdapter.Re
             // Start RecipeDetailActivity by Selected Recipe
             binding.containerRecipeItem.setOnClickListener {
                 Intent(parent.context, RecipeDetailActivity::class.java).apply {
-                    putExtra("recipe", item)
+                    putExtra("recipeId", item.basic.recipeId)
                     (parent.context as BaseActivity).startActivity(this)
                 }
             }
