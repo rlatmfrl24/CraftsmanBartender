@@ -11,7 +11,7 @@ class MakingStyleAdapter<T>(context: Context, textViewResourceId: Int, objects: 
         return filter
     }
 
-    private open inner class MakingStyleFilter : Filter() {
+    private inner class MakingStyleFilter : Filter() {
         override fun performFiltering(char: CharSequence?): FilterResults {
             val result = FilterResults()
             result.values = items

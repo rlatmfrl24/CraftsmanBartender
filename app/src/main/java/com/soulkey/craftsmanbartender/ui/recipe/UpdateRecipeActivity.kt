@@ -66,10 +66,12 @@ class UpdateRecipeActivity : AppCompatActivity() {
 
         binding.tvAddUpdate.setOnClickListener {
             lifecycleScope.launch {
-                recipeViewModel.updateRecipe()
-                intent.putExtra("updateId", recipeViewModel.currentID.value)
-                setResult(Activity.RESULT_OK, intent)
-                finish()
+                if (checkInputValidation()) {
+                    recipeViewModel.updateRecipe()
+                    intent.putExtra("updateId", recipeViewModel.currentID.value)
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                }
             }
         }
     }
@@ -77,5 +79,46 @@ class UpdateRecipeActivity : AppCompatActivity() {
     override fun onBackPressed() {
         setResult(Activity.RESULT_CANCELED, intent)
         finish()
+    }
+
+
+    private fun checkInputValidation(): Boolean {
+        val isInputValid =
+                !recipeViewModel.recipeName.value.isNullOrBlank()
+                        && !recipeViewModel.recipeGlass.value.isNullOrBlank()
+                        && recipeViewModel.primaryMakingStyle.value != null
+                        && !recipeViewModel.ingredients.value.isNullOrEmpty()
+
+        if (isInputValid) {
+            if (recipeViewModel.secondaryMakingStyle.value == null) {
+                recipeViewModel.secondaryMakingStyle.value = MakingStyle.None
+            }
+            if (recipeViewModel.recipeGarnish.value.isNullOrBlank()) {
+                recipeViewModel.recipeGarnish.value = "None"
+            }
+        } else {
+            if (recipeViewModel.recipeName.value.isNullOrBlank()) {
+                binding.tilRecipeName.error = "Please Insert Recipe's Name"
+            } else {
+                binding.tilRecipeName.isErrorEnabled = false
+            }
+            if (recipeViewModel.recipeGlass.value.isNullOrBlank()) {
+                binding.tilRecipeGlass.error = "Please Insert Glass for Cocktail"
+            } else {
+                binding.tilRecipeGlass.isErrorEnabled = false
+            }
+            if (recipeViewModel.primaryMakingStyle.value == null) {
+                binding.tilRecipePrimaryMakingStyle.error = "You must choice Primary Making Style"
+            } else {
+                binding.tilRecipePrimaryMakingStyle.isErrorEnabled = false
+            }
+            if (recipeViewModel.ingredients.value.isNullOrEmpty()) {
+                binding.containerErrorMsgIngredient.visibility = View.VISIBLE
+            } else {
+                binding.containerErrorMsgIngredient.visibility = View.INVISIBLE
+            }
+        }
+
+        return isInputValid
     }
 }

@@ -19,6 +19,7 @@ import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.MakingStyle
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
 import com.soulkey.craftsmanbartender.lib.view.ViewUtil
 import com.soulkey.craftsmanbartender.ui.adapter.AddRecipeIngredientListAdapter
+import com.soulkey.craftsmanbartender.ui.adapter.MakingStyleAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddRecipeActivity : BaseActivity() {
@@ -37,7 +38,7 @@ class AddRecipeActivity : BaseActivity() {
 
         // Making Style Spinner Setting
         val makingStyleList = MakingStyle.values().map { it.name }
-        val makeStyleAdapter = ArrayAdapter(this, R.layout.item_spinner_default, makingStyleList)
+        val makeStyleAdapter = MakingStyleAdapter(this, R.layout.item_spinner_default, makingStyleList)
         binding.spinnerPrimaryMakingStyle.setAdapter(makeStyleAdapter)
         binding.spinnerSecondaryMakingStyle.setAdapter(makeStyleAdapter)
 

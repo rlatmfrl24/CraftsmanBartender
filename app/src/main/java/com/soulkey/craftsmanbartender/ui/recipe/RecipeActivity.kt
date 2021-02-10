@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import com.afollestad.materialdialogs.MaterialDialog
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ActivityRecipeBinding
 import com.soulkey.craftsmanbartender.lib.common.BaseActivity
@@ -29,11 +30,17 @@ class RecipeActivity : BaseActivity() {
             when(it.itemId) {
                 R.id.menu_recipe_reset -> {
                     // Load Base Recipes from Firestore
-                    lifecycleScope.launch {
-                        binding.progressbarRecipeLoading.visibility = View.VISIBLE
-                        recipeViewModel.resetRecipeList()
-                        binding.progressbarRecipeLoading.visibility = View.GONE
-                    }
+                    MaterialDialog(binding.root.context)
+                            .title(text = "Recipe Reset")
+                            .message(text = getString(R.string.string_warning_msg_recipe_reset))
+                            .positiveButton {
+                                lifecycleScope.launch {
+                                    binding.progressbarRecipeLoading.visibility = View.VISIBLE
+                                    recipeViewModel.resetRecipeList()
+                                    binding.progressbarRecipeLoading.visibility = View.GONE
+                                }
+                            }.negativeButton()
+                            .show()
                     true
                 }
                 else -> false
