@@ -138,7 +138,7 @@
 
                     <TextView
                         android:id="@+id/tv_header_ingredients"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="@string/string_ingredients"
@@ -148,35 +148,46 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/til_recipe_secondary_making_style"/>
 
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/container_error_msg_ingredient"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="20dp"
                         android:visibility="invisible"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_header_ingredients"
                         app:layout_constraintTop_toTopOf="@id/tv_header_ingredients"
                         app:layout_constraintBottom_toBottomOf="@id/tv_header_ingredients">
+
                         <ImageView
                             android:id="@+id/iv_error_ingredient"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_marginEnd="3dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:src="@drawable/ic_error_red_24px"
-                            app:layout_constraintTop_toTopOf="@id/tv_error_msg_ingredient"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_error_msg_ingredient"
-                            app:layout_constraintEnd_toStartOf="@id/tv_error_msg_ingredient"/>
-
-                        <TextView
-                            android:id="@+id/tv_error_msg_ingredient"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="You must insert one Ingredient at least"
-                            android:textColor="@color/red_600"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="3dp"
+                            android:gravity="center|start"
+                            android:text="@string/string_ingredient_error_msg"
+                            android:textColor="@color/red_600"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="12sp"
+                            android:autoSizeMinTextSize="8sp"
+                            android:autoSizeStepGranularity="1sp"
+                            android:includeFontPadding="false"
+                            app:layout_constraintStart_toEndOf="@id/iv_error_ingredient"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_add_recipe_ingredients"
