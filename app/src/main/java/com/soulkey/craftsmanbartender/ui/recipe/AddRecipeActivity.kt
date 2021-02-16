@@ -2,26 +2,17 @@ package com.soulkey.craftsmanbartender.ui.recipe
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
-import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
-import com.google.android.material.textfield.TextInputLayout
-import com.google.android.material.transition.platform.MaterialArcMotion
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ActivityAddRecipeBinding
-import com.soulkey.craftsmanbartender.databinding.DialogAddIngredientBinding
 import com.soulkey.craftsmanbartender.lib.common.BaseActivity
 import com.soulkey.craftsmanbartender.lib.common.BaseUtil.Companion.makeRequiredInRed
-import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.IngredientUnit
 import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.MakingStyle
-import com.soulkey.craftsmanbartender.lib.model.Ingredient
 import com.soulkey.craftsmanbartender.lib.view.ViewUtil
 import com.soulkey.craftsmanbartender.ui.adapter.AddRecipeIngredientListAdapter
 import com.soulkey.craftsmanbartender.ui.adapter.MakingStyleAdapter
@@ -39,13 +30,18 @@ class AddRecipeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+
         window.sharedElementEnterTransition = MaterialContainerTransform().apply {
-            addTarget(binding.layoutRecipeAdd)
-            duration = 300L
+            addTarget(R.id.layout_recipe_add)
+            drawingViewId = R.id.layout_recipe_add
+            containerColor = Color.WHITE
+            fadeMode = MaterialContainerTransform.FADE_MODE_OUT
+            interpolator = FastOutSlowInInterpolator()
+            duration = 500L
         }
         window.sharedElementReturnTransition = MaterialContainerTransform().apply {
-            addTarget(binding.layoutRecipeAdd)
-            duration = 250L
+            addTarget(R.id.layout_recipe_add)
+            duration = 300L
         }
 
         super.onCreate(savedInstanceState)

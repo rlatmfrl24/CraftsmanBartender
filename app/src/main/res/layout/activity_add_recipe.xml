@@ -18,8 +18,7 @@
         android:id="@+id/layout_recipe_add"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:transitionName="shared_recipe_add"
-        >
+        android:transitionName="shared_recipe_add">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"

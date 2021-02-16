@@ -29,6 +29,7 @@ class RecipeActivity : BaseActivity() {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
         window.sharedElementsUseOverlay = false
+
         super.onCreate(savedInstanceState)
         binding.adapter = recipeAdapter
 

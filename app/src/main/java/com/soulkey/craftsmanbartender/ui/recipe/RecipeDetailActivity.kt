@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.Window
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.databinding.DataBindingUtil
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.afollestad.materialdialogs.MaterialDialog
-import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.soulkey.craftsmanbartender.R
@@ -34,13 +34,18 @@ class RecipeDetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+
         window.sharedElementEnterTransition = MaterialContainerTransform().apply {
             addTarget(R.id.layout_recipe_detail)
-            duration = 300L
+            drawingViewId = R.id.layout_recipe_detail
+            containerColor = Color.WHITE
+            fadeMode = MaterialContainerTransform.FADE_MODE_OUT
+            interpolator = FastOutSlowInInterpolator()
+            duration = 500L
         }
         window.sharedElementReturnTransition = MaterialContainerTransform().apply {
             addTarget(R.id.layout_recipe_detail)
-            duration = 250L
+            duration = 300L
         }
 
         super.onCreate(savedInstanceState)
