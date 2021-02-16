@@ -73,7 +73,7 @@ class AddRecipeActivity : BaseActivity() {
         binding.tvAddBtn.setOnClickListener {
             if (checkInputValidation()) {
                 recipeViewModel.createRecipe()
-                finish()
+                supportFinishAfterTransition()
             }
         }
     }

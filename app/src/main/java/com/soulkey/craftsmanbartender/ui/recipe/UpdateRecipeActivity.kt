@@ -70,7 +70,7 @@ class UpdateRecipeActivity : AppCompatActivity() {
                     recipeViewModel.updateRecipe()
                     intent.putExtra("updateId", recipeViewModel.currentID.value)
                     setResult(Activity.RESULT_OK, intent)
-                    finish()
+                    supportFinishAfterTransition()
                 }
             }
         }

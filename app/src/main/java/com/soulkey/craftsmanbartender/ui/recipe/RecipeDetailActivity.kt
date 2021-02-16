@@ -85,7 +85,7 @@ class RecipeDetailActivity : BaseActivity() {
                         .message(text = "정말로 해당 레시피를 삭제하시겠습니까?")
                         .positiveButton {
                             recipeViewModel.deleteCurrentRecipe()
-                            finish()
+                            supportFinishAfterTransition()
                         }
                         .negativeButton()
                         .show()
