@@ -5,6 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_recipe_item"
+        android:transitionName="shared_recipe_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,6 +19,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:fontFamily="@font/spoqa_han_sans_bold"
+            android:transitionName="shared_recipe_name"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

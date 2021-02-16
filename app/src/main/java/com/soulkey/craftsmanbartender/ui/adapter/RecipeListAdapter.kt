@@ -1,5 +1,6 @@
 package com.soulkey.craftsmanbartender.ui.adapter
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.soulkey.craftsmanbartender.databinding.ItemRecipeListBinding
 import com.soulkey.craftsmanbartender.lib.common.BaseActivity
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 import com.soulkey.craftsmanbartender.ui.recipe.RecipeDetailActivity
+import android.util.Pair as UtilPair
 
 class RecipeListAdapter : ListAdapter<RecipeWithIngredient, RecipeListAdapter.RecipeViewHolder>(object: DiffUtil.ItemCallback<RecipeWithIngredient>(){
     override fun areItemsTheSame(oldItem: RecipeWithIngredient, newItem: RecipeWithIngredient): Boolean {
@@ -31,9 +33,13 @@ class RecipeListAdapter : ListAdapter<RecipeWithIngredient, RecipeListAdapter.Re
 
             // Start RecipeDetailActivity by Selected Recipe
             binding.containerRecipeItem.setOnClickListener {
-                Intent(parent.context, RecipeDetailActivity::class.java).apply {
-                    putExtra("recipeId", item.basic.recipeId)
-                    (parent.context as BaseActivity).startActivity(this)
+                Intent(parent.context, RecipeDetailActivity::class.java).also { intent->
+                    intent.putExtra("recipeId", item.basic.recipeId)
+                    val options = ActivityOptions.makeSceneTransitionAnimation(parent.context as BaseActivity,
+//                            UtilPair.create(binding.tvRecipeName, "shared_recipe_name"),
+                            UtilPair.create(binding.containerRecipeItem, "shared_recipe_container")
+                    )
+                    (parent.context as BaseActivity).startActivity(intent, options.toBundle())
                 }
             }
 

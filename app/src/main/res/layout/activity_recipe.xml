@@ -70,9 +70,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
+            android:contentDescription="@string/string_recipe_add_content_description"
+            android:transitionName="shared_recipe_add"
             app:backgroundTint="@color/orange_300"
             app:srcCompat="@drawable/ic_add_24px"
-            android:contentDescription="@string/string_recipe_add_content_description"
             tools:ignore="RtlHardcoded" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -15,8 +15,10 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/layout_recipe_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:transitionName="shared_recipe_container">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_recipe_detail"
@@ -28,9 +30,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:navigationIcon="@drawable/ic_arrow_back_24px"
-                app:menu="@menu/menu_recipe_detail_app_bar"
-                app:titleTextAppearance="@style/Theme.CraftsmanBartender.ToolbarTextAppearance"
-                app:title="@{viewModel.currentRecipeWithIngredient.basic.name, default=`Recipe Name`}"/>
+                app:menu="@menu/menu_recipe_detail_app_bar">
+
+                <TextView
+                    android:id="@+id/tv_title_recipe_name"
+                    style="@style/Theme.CraftsmanBartender.ToolbarTextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:transitionName="shared_recipe_name"
+                    android:text="@{viewModel.currentRecipeWithIngredient.basic.name, default=`Recipe Name`}"/>
+
+            </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 

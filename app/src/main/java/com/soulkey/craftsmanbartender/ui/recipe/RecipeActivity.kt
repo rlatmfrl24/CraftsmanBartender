@@ -1,11 +1,15 @@
 package com.soulkey.craftsmanbartender.ui.recipe
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.util.Pair
 import android.view.View
+import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ActivityRecipeBinding
 import com.soulkey.craftsmanbartender.lib.common.BaseActivity
@@ -22,6 +26,9 @@ class RecipeActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+        window.sharedElementsUseOverlay = false
         super.onCreate(savedInstanceState)
         binding.adapter = recipeAdapter
 
@@ -54,8 +61,11 @@ class RecipeActivity : BaseActivity() {
 
         // Add Recipe Fab Button action
         binding.fabAddRecipe.setOnClickListener {
-            Intent(this, AddRecipeActivity::class.java).apply {
-                startActivity(this)
+            Intent(this, AddRecipeActivity::class.java).also { intent ->
+                val options = ActivityOptions.makeSceneTransitionAnimation(this,
+                        Pair.create(it, "shared_recipe_add")
+                )
+                startActivity(intent, options.toBundle())
             }
         }
     }

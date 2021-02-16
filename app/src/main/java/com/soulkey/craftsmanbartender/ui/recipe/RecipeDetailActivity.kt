@@ -2,18 +2,20 @@ package com.soulkey.craftsmanbartender.ui.recipe
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
+import android.view.Window
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Transformations
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.transition.platform.MaterialArcMotion
+import com.google.android.material.transition.platform.MaterialContainerTransform
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ActivityRecipeDetailBinding
 import com.soulkey.craftsmanbartender.lib.common.BaseActivity
 import com.soulkey.craftsmanbartender.ui.adapter.IngredientListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class RecipeDetailActivity : BaseActivity() {
 
@@ -30,6 +32,17 @@ class RecipeDetailActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+        window.sharedElementEnterTransition = MaterialContainerTransform().apply {
+            addTarget(R.id.layout_recipe_detail)
+            duration = 300L
+        }
+        window.sharedElementReturnTransition = MaterialContainerTransform().apply {
+            addTarget(R.id.layout_recipe_detail)
+            duration = 250L
+        }
+
         super.onCreate(savedInstanceState)
         binding.viewModel = recipeViewModel
         binding.adapter = ingredientAdapter
@@ -48,7 +61,7 @@ class RecipeDetailActivity : BaseActivity() {
 
         // Toolbar - Back Button Action
         binding.toolbarRecipeDetail.setNavigationOnClickListener {
-            finish()
+            supportFinishAfterTransition()
         }
 
         // Toolbar - Delete Button Action

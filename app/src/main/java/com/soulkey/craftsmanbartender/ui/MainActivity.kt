@@ -1,5 +1,6 @@
 package com.soulkey.craftsmanbartender.ui
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -48,7 +49,7 @@ class MainActivity : BaseActivity() {
                 startActivity(this)
             }
         }
-        binding.cardMostTestBtn.setOnClickListener {
+        binding.cardMockTestBtn.setOnClickListener {
             Intent(this, MockTestActivity::class.java).apply {
                 startActivity(this)
             }
