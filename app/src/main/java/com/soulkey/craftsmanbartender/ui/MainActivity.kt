@@ -1,6 +1,5 @@
 package com.soulkey.craftsmanbartender.ui
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -15,7 +14,6 @@ import com.soulkey.craftsmanbartender.ui.recipe.RecipeActivity
 import com.soulkey.craftsmanbartender.ui.recipe.RecipeViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class MainActivity : BaseActivity() {
     private val sharedPreferences: SharedPreferences by lazy {
@@ -31,6 +29,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launch {
+            setTheme(R.style.Theme_CraftsmanBartender)
             // Check First Fun
             val isFirstRun = sharedPreferences.getBoolean("isFirstRun", true)
             if (isFirstRun) {
@@ -41,7 +40,6 @@ class MainActivity : BaseActivity() {
                 binding.containerMain.visibility = View.VISIBLE
                 binding.progressbarRecipeLoading.visibility = View.INVISIBLE
             }
-            setTheme(R.style.Theme_CraftsmanBartender)
         }
 
         binding.cardRecipesBtn.setOnClickListener {
