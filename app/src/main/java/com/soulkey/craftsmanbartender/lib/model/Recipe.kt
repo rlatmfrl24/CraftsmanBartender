@@ -18,7 +18,7 @@ data class Recipe(
         @ColumnInfo var garnish: String?,
         @ColumnInfo var applyMockTest: Boolean
 ) : Parcelable {
-        fun combineMakingStylesToString(): String? {
+        fun combineMakingStylesToString(): String {
                 val makingStyleString = primaryMakingStyle.name
                 val secondStyle = secondaryMakingStyle?: return makingStyleString
                 return makingStyleString + " / " + secondStyle.name

@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.Window
-import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
 import androidx.databinding.DataBindingUtil
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
@@ -19,7 +18,6 @@ import com.soulkey.craftsmanbartender.lib.view.ViewUtil
 import com.soulkey.craftsmanbartender.ui.adapter.AddRecipeIngredientListAdapter
 import com.soulkey.craftsmanbartender.ui.adapter.MakingStyleAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class AddRecipeActivity : BaseActivity() {
     private val recipeViewModel : RecipeViewModel by viewModel()

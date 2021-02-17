@@ -10,12 +10,10 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.soulkey.craftsmanbartender.R
-import com.soulkey.craftsmanbartender.databinding.DialogRecipeHintBinding
 import com.soulkey.craftsmanbartender.databinding.FragmentMockTestBinding
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 import com.soulkey.craftsmanbartender.lib.view.ViewUtil
@@ -46,7 +44,7 @@ class MockTestFragment : Fragment() {
             }
         }
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_mock_test, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root

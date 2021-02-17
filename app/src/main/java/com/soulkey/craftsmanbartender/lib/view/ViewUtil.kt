@@ -2,7 +2,6 @@ package com.soulkey.craftsmanbartender.lib.view
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -12,7 +11,6 @@ import com.afollestad.materialdialogs.customview.customView
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.DialogAddIngredientBinding
 import com.soulkey.craftsmanbartender.databinding.DialogRecipeHintBinding
-import com.soulkey.craftsmanbartender.lib.common.BaseActivity
 import com.soulkey.craftsmanbartender.lib.common.Constants
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient

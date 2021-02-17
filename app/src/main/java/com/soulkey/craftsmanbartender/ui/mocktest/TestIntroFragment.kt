@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.FragmentMockTestIntroBinding
@@ -14,7 +13,7 @@ import com.soulkey.craftsmanbartender.databinding.FragmentMockTestIntroBinding
 class TestIntroFragment : Fragment(){
     private lateinit var binding: FragmentMockTestIntroBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_mock_test_intro, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root

@@ -3,15 +3,11 @@ package com.soulkey.craftsmanbartender.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.soulkey.craftsmanbartender.R
-import com.soulkey.craftsmanbartender.databinding.DialogRecipeHintBinding
 import com.soulkey.craftsmanbartender.databinding.ItemResultRecipeListBinding
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 import com.soulkey.craftsmanbartender.lib.view.ViewUtil

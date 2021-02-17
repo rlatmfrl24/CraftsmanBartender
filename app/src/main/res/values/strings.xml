@@ -45,4 +45,5 @@
     <string name="string_update">Update</string>
     <string name="string_warning_msg_recipe_reset">Recipe 목록을 표준 조주기능사 레시피 목록으로 초기화합니다\n초기화 후에는 기존 레시피는 복구할 수 없습니다\n초기화하시겠습니까?</string>
     <string name="string_ingredient_error_msg">You must insert one ingredient at least</string>
+    <string name="string_fill_up">Fill-Up</string>
 </resources>

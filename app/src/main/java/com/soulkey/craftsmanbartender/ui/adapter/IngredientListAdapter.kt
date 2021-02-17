@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ItemIngredientListBinding
-import com.soulkey.craftsmanbartender.lib.common.Constants
 import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.IngredientUnit
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
 

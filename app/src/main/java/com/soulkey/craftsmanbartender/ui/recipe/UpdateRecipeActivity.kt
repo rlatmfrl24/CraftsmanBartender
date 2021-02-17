@@ -1,23 +1,16 @@
 package com.soulkey.craftsmanbartender.ui.recipe
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
-import android.widget.ArrayAdapter
-import androidx.compose.ui.node.getOrAddAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.soulkey.craftsmanbartender.R
-import com.soulkey.craftsmanbartender.databinding.ActivityAddRecipeBinding
 import com.soulkey.craftsmanbartender.databinding.ActivityUpdateRecipeBinding
-import com.soulkey.craftsmanbartender.lib.common.Constants
 import com.soulkey.craftsmanbartender.lib.common.Constants.Companion.MakingStyle
-import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 import com.soulkey.craftsmanbartender.lib.view.ViewUtil
 import com.soulkey.craftsmanbartender.ui.adapter.AddRecipeIngredientListAdapter
-import com.soulkey.craftsmanbartender.ui.adapter.IngredientListAdapter
 import com.soulkey.craftsmanbartender.ui.adapter.MakingStyleAdapter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
