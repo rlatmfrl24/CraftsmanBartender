@@ -3,13 +3,16 @@ package com.soulkey.craftsmanbartender.lib.view
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.databinding.DataBindingUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.DialogAddIngredientBinding
 import com.soulkey.craftsmanbartender.databinding.DialogRecipeHintBinding
+import com.soulkey.craftsmanbartender.lib.common.BaseActivity
 import com.soulkey.craftsmanbartender.lib.common.Constants
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
@@ -47,12 +50,8 @@ class ViewUtil {
                             else -> {
                                 val amount =
                                         when {
-                                            dialogBinding.etIngredientAmount.text?.toString().isNullOrEmpty() -> {
-                                                0f
-                                            }
-                                            dialogBinding.etIngredientAmount.text?.toString().equals("-") -> {
-                                                0f
-                                            }
+                                            dialogBinding.etIngredientAmount.text?.toString().isNullOrEmpty() -> 0f
+                                            dialogBinding.etIngredientAmount.text?.toString().equals("-") -> 0f
                                             else -> dialogBinding.etIngredientAmount.text?.toString()?.toFloat()
                                         }
                                 Ingredient(
@@ -81,6 +80,14 @@ class ViewUtil {
                                 dialogBinding.etIngredientAmount.setText("-")
                             } else {
                                 dialogBinding.etIngredientAmount.isEnabled = true
+                            }
+                        }
+                        dialogBinding.spinnerIngredientUnit.setOnFocusChangeListener { v, hasFocus ->
+                            if (hasFocus) {
+                                (v as AutoCompleteTextView).showDropDown()
+                                context.getSystemService(Context.INPUT_METHOD_SERVICE).also { imm ->
+                                    (imm as InputMethodManager).hideSoftInputFromWindow(v.windowToken, 0)
+                                }
                             }
                         }
                     }

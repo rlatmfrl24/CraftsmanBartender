@@ -64,7 +64,9 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={viewModel.recipeName}"/>
+                            android:text="@={viewModel.recipeName}"
+                            android:singleLine="true"
+                            android:nextFocusDown="@id/til_recipe_glass"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +83,9 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={viewModel.recipeGlass}"/>
+                            android:text="@={viewModel.recipeGlass}"
+                            android:singleLine="true"
+                            android:nextFocusDown="@id/til_recipe_garnish"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +102,9 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={viewModel.recipeGarnish}"/>
+                            android:text="@={viewModel.recipeGarnish}"
+                            android:singleLine="true"
+                            android:nextFocusDown="@id/spinner_primary_making_style"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,6 +121,8 @@
                             android:id="@+id/spinner_primary_making_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
                             text="@={viewModel.primaryMakingStyle}"
                             android:inputType="none"/>
 
@@ -133,6 +141,8 @@
                             android:id="@+id/spinner_secondary_making_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
                             text="@={viewModel.secondaryMakingStyle}"
                             android:inputType="none"/>
 

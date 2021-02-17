@@ -37,15 +37,17 @@ class RecipeDetailActivity : BaseActivity() {
 
         window.sharedElementEnterTransition = MaterialContainerTransform().apply {
             addTarget(R.id.layout_recipe_detail)
-            drawingViewId = R.id.layout_recipe_detail
             containerColor = Color.WHITE
-            fadeMode = MaterialContainerTransform.FADE_MODE_OUT
+            fadeMode = MaterialContainerTransform.FADE_MODE_CROSS
             interpolator = FastOutSlowInInterpolator()
-            duration = 500L
+            duration = 400L
         }
         window.sharedElementReturnTransition = MaterialContainerTransform().apply {
             addTarget(R.id.layout_recipe_detail)
-            duration = 300L
+            containerColor = Color.WHITE
+            fadeMode = MaterialContainerTransform.FADE_MODE_CROSS
+            interpolator = FastOutSlowInInterpolator()
+            duration = 400L
         }
 
         super.onCreate(savedInstanceState)
