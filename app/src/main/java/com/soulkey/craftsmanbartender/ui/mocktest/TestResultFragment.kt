@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.transition.MaterialFadeThrough
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.FragmentTestResultBinding
 import com.soulkey.craftsmanbartender.ui.adapter.ResultRecipeListAdapter
@@ -17,6 +18,12 @@ class TestResultFragment : Fragment() {
     private val mockTestViewModel : MockTestViewModel by sharedViewModel()
     private val skippedRecipesAdapter by lazy { ResultRecipeListAdapter(requireContext()) }
     private val hintCheckedRecipesAdapter by lazy { ResultRecipeListAdapter(requireContext()) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

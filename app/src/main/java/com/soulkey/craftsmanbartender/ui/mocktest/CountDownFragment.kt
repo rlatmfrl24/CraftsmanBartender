@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.transition.MaterialFadeThrough
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.FragmentCountDownBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -16,6 +17,13 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class CountDownFragment : Fragment() {
     private lateinit var binding: FragmentCountDownBinding
     private val mockTestViewModel: MockTestViewModel by sharedViewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

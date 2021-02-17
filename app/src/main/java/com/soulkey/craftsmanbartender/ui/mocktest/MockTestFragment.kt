@@ -13,6 +13,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.transition.MaterialFadeThrough
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.FragmentMockTestBinding
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
@@ -24,7 +25,7 @@ class MockTestFragment : Fragment() {
     companion object {
         const val SECOND_UNIT = 1000
         const val MINUTE_UNIT = SECOND_UNIT * 60
-        const val TEST_TIME = 0.1
+        const val TEST_TIME = 7
     }
 
     private lateinit var binding: FragmentMockTestBinding
@@ -48,6 +49,12 @@ class MockTestFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
