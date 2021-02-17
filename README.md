@@ -13,8 +13,7 @@
 - 인증 및 사용자 기능 구상
 - Preference 기능 구상 및 적용
   - Side-bar 화면 구현
-- Recipe 수정 기능
-- Cloud Recipe 기능 동기화 시 로딩화면 적용
-- Main Activity 화면 개선
-- 앱 최초 기동시 데이터 가져오도록 변경
 - 야간 모드 구현
+- Recipe 검색 기능
+- Ingredient 추가 시 추천 키워드 적용
+- 필기 관련 기능 추가
