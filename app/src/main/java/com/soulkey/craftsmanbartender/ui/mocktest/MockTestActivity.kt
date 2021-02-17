@@ -14,16 +14,17 @@ class MockTestActivity : BaseActivity() {
         setContentView(R.layout.activity_mock_test)
     }
 
+    private val testCloseWarningDialog by lazy {
+        MaterialDialog(this)
+                .title(text = "Warning")
+                .message(text = "테스트가 완료되지 않았습니다. 정말 테스트를 종료할까요?")
+                .positiveButton { finish() }
+                .negativeButton()
+    }
+
     override fun onBackPressed() {
         if (mockTestViewModel.isTestFinished.value == false) {
-            MaterialDialog(this)
-                    .title(text = "Warning")
-                    .message(text = "테스트가 완료되지 않았습니다. 정말 테스트를 종료할까요?")
-                    .positiveButton {
-                        finish()
-                    }
-                    .negativeButton()
-                    .show()
+            testCloseWarningDialog.show()
         } else {
             finish()
         }
