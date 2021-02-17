@@ -24,12 +24,11 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment_mock_test"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph_mock_test" />
-
+            app:navGraph="@navigation/nav_graph_mock_test"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

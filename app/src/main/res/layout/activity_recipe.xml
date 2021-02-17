@@ -26,7 +26,6 @@
                 app:title="Recipes"
                 app:menu="@menu/menu_recipe_app_bar"
                 app:titleTextAppearance="@style/Theme.CraftsmanBartender.ToolbarTextAppearance">
-
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -41,11 +40,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressbar_recipe_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:visibility="gone"
+                    app:indicatorColor="@color/red_400"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_recipes"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/progressbar_recipe_loading"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:setAdapter="@{adapter}"
@@ -62,9 +70,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
+            android:contentDescription="@string/string_recipe_add_content_description"
+            android:transitionName="shared_recipe_add"
             app:backgroundTint="@color/orange_300"
             app:srcCompat="@drawable/ic_add_24px"
-            android:contentDescription="@string/string_recipe_add_content_description"
             tools:ignore="RtlHardcoded" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -20,7 +20,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_ingredient_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:nextFocusDown="@id/til_ingredient_amount"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -40,7 +42,9 @@
                 android:id="@+id/et_ingredient_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:nextFocusDown="@id/spinner_ingredient_unit"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,6 +63,9 @@
                 android:id="@+id/spinner_ingredient_unit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:dropDownHeight="150dp"
                 android:inputType="none"/>
 
         </com.google.android.material.textfield.TextInputLayout>

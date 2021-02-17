@@ -1,14 +1,19 @@
 package com.soulkey.craftsmanbartender.ui.recipe
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.widget.Toast
+import android.view.Window
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.transition.platform.MaterialContainerTransform
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.soulkey.craftsmanbartender.R
 import com.soulkey.craftsmanbartender.databinding.ActivityRecipeDetailBinding
 import com.soulkey.craftsmanbartender.lib.common.BaseActivity
-import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 import com.soulkey.craftsmanbartender.ui.adapter.IngredientListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,20 +24,41 @@ class RecipeDetailActivity : BaseActivity() {
     private val binding: ActivityRecipeDetailBinding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_recipe_detail)
     }
+    private val updateRecipeLauncher = registerForActivityResult(StartActivityForResult()) { result->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val updateId = result.data?.getLongExtra("updateId", -1)
+            recipeViewModel.currentID.value = (updateId)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+
+        window.sharedElementEnterTransition = MaterialContainerTransform().apply {
+            addTarget(R.id.layout_recipe_detail)
+            containerColor = Color.WHITE
+            fadeMode = MaterialContainerTransform.FADE_MODE_CROSS
+            interpolator = FastOutSlowInInterpolator()
+            duration = 400L
+        }
+        window.sharedElementReturnTransition = MaterialContainerTransform().apply {
+            addTarget(R.id.layout_recipe_detail)
+            containerColor = Color.WHITE
+            fadeMode = MaterialContainerTransform.FADE_MODE_CROSS
+            interpolator = FastOutSlowInInterpolator()
+            duration = 400L
+        }
+
         super.onCreate(savedInstanceState)
         binding.viewModel = recipeViewModel
         binding.adapter = ingredientAdapter
+        binding.lifecycleOwner = this
 
         // Initialize Recipe to ViewModel
-        intent.getParcelableExtra<RecipeWithIngredient>("recipe")?.also { recipe->
-            recipeViewModel.initializeRecipe(recipe)
-        }
-
-        // Set Ingredients to Recyclerview
-        recipeViewModel.ingredients.observe(this, { list ->
-            ingredientAdapter.submitList(list)
+        recipeViewModel.currentID.value = intent.getLongExtra("recipeId", -1)
+        recipeViewModel.currentRecipeWithIngredient.observe(this, {
+            ingredientAdapter.submitList(it.ingredients)
         })
 
         // Apply to Mock Test Button Setting
@@ -42,14 +68,16 @@ class RecipeDetailActivity : BaseActivity() {
 
         // Toolbar - Back Button Action
         binding.toolbarRecipeDetail.setNavigationOnClickListener {
-            finish()
+            supportFinishAfterTransition()
         }
 
         // Toolbar - Delete Button Action
         binding.toolbarRecipeDetail.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.menu_recipe_detail_update -> {
-                    Toast.makeText(this, "해당 기능은 준비중입니다", Toast.LENGTH_SHORT).show()
+                    updateRecipeLauncher.launch(Intent(this, UpdateRecipeActivity::class.java).apply {
+                        putExtra("recipeId", recipeViewModel.currentID.value)
+                    })
                     true
                 }
                 R.id.menu_recipe_detail_delete -> {
@@ -59,7 +87,7 @@ class RecipeDetailActivity : BaseActivity() {
                         .message(text = "정말로 해당 레시피를 삭제하시겠습니까?")
                         .positiveButton {
                             recipeViewModel.deleteCurrentRecipe()
-                            finish()
+                            supportFinishAfterTransition()
                         }
                         .negativeButton()
                         .show()

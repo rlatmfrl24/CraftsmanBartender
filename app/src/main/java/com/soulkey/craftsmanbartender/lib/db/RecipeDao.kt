@@ -5,10 +5,10 @@ import androidx.room.*
 import com.soulkey.craftsmanbartender.lib.model.Ingredient
 import com.soulkey.craftsmanbartender.lib.model.RecipeWithIngredient
 import com.soulkey.craftsmanbartender.lib.model.Recipe
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RecipeDao {
+
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createRecipe(recipe: Recipe, ingredients: List<Ingredient>){
@@ -17,6 +17,23 @@ interface RecipeDao {
             it.apply { recipeBasicId = recipeId }
         }.also { insertIngredients(it) }
     }
+
+    @Transaction
+    @Update
+    suspend fun updateRecipeWithIngredient(recipe: Recipe, ingredients: List<Ingredient>) {
+        updateRecipe(recipe)
+        deleteIngredients(getIngredientsByRecipeID(recipe.recipeId!!))
+        ingredients.map {
+            it.apply { recipeBasicId = recipe.recipeId }
+        }.also { insertIngredients(ingredients) }
+    }
+
+    @Transaction
+    @Query("SELECT * FROM Recipe WHERE recipeId LIKE :id")
+    fun getRecipeWithIngredientByRecipeID(id: Long): RecipeWithIngredient
+
+    @Query("SELECT * FROM ingredients WHERE recipeBasicId=:id")
+    suspend fun getIngredientsByRecipeID(id: Long): List<Ingredient>
 
     @Transaction
     @Delete

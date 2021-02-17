@@ -11,14 +11,14 @@ import kotlinx.parcelize.Parcelize
 @Entity
 data class Recipe(
         @PrimaryKey(autoGenerate = true) val recipeId: Long?,
-        @ColumnInfo val name: String,
-        @ColumnInfo val primaryMakingStyle: MakingStyle,
-        @ColumnInfo val secondaryMakingStyle: MakingStyle?,
-        @ColumnInfo val glass: String,
-        @ColumnInfo val garnish: String?,
+        @ColumnInfo var name: String,
+        @ColumnInfo var primaryMakingStyle: MakingStyle,
+        @ColumnInfo var secondaryMakingStyle: MakingStyle?,
+        @ColumnInfo var glass: String,
+        @ColumnInfo var garnish: String?,
         @ColumnInfo var applyMockTest: Boolean
 ) : Parcelable {
-        fun combineMakingStylesToString(): String? {
+        fun combineMakingStylesToString(): String {
                 val makingStyleString = primaryMakingStyle.name
                 val secondStyle = secondaryMakingStyle?: return makingStyleString
                 return makingStyleString + " / " + secondStyle.name

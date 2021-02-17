@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.recipe.AddRecipeActivity">
+    tools:context=".ui.recipe.UpdateRecipeActivity">
 
     <data>
         <variable
@@ -15,10 +15,8 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/layout_recipe_add"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:transitionName="shared_recipe_add">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -27,7 +25,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:title="Add New Recipe"
+                app:title="Update Recipe"
                 app:titleTextAppearance="@style/Theme.CraftsmanBartender.ToolbarTextAppearance"/>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -49,7 +47,7 @@
                     android:padding="10dp"
                     app:layout_constraintVertical_chainStyle="spread_inside"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/tv_add_btn">
+                    app:layout_constraintBottom_toTopOf="@id/tv_add_update">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_recipe_name"
@@ -64,9 +62,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={viewModel.recipeName}"
-                            android:singleLine="true"
-                            android:nextFocusDown="@id/til_recipe_glass"/>
+                            android:text="@={viewModel.recipeName}"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,9 +79,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={viewModel.recipeGlass}"
-                            android:singleLine="true"
-                            android:nextFocusDown="@id/til_recipe_garnish"/>
+                            android:text="@={viewModel.recipeGlass}"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,9 +96,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={viewModel.recipeGarnish}"
-                            android:singleLine="true"
-                            android:nextFocusDown="@id/spinner_primary_making_style"/>
+                            android:text="@={viewModel.recipeGarnish}"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,8 +113,6 @@
                             android:id="@+id/spinner_primary_making_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
                             text="@={viewModel.primaryMakingStyle}"
                             android:inputType="none"/>
 
@@ -141,8 +131,6 @@
                             android:id="@+id/spinner_secondary_making_style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
                             text="@={viewModel.secondaryMakingStyle}"
                             android:inputType="none"/>
 
@@ -159,7 +147,6 @@
                         android:fontFamily="@font/spoqa_han_sans_bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/til_recipe_secondary_making_style"/>
-
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/container_error_msg_ingredient"
@@ -199,7 +186,6 @@
                             app:layout_constraintBottom_toBottomOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_add_recipe_ingredients"
@@ -256,11 +242,11 @@
 
 
                 <TextView
-                    android:id="@+id/tv_add_btn"
+                    android:id="@+id/tv_add_update"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/string_create"
+                    android:text="@string/string_update"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:fontFamily="@font/spoqa_han_sans_bold"

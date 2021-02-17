@@ -33,7 +33,7 @@ class AddRecipeIngredientListAdapter(private val viewModel: RecipeViewModel) : L
                 // Data View Type Setting by Ingredient Unit Type
                 Constants.Companion.IngredientUnit.fill -> {
                     binding.tvIngredientAmount.visibility = View.GONE
-                    binding.tvIngredientUnit.text = "Fill-Up"
+                    binding.tvIngredientUnit.text = binding.root.context.getString(R.string.string_fill_up)
                 }
                 else -> {
                     // Check Decimal Data (Non-Decimal to Int)

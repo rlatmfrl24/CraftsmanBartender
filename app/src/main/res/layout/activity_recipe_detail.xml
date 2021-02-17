@@ -15,8 +15,10 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/layout_recipe_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:transitionName="shared_recipe_container">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_recipe_detail"
@@ -28,9 +30,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:navigationIcon="@drawable/ic_arrow_back_24px"
-                app:menu="@menu/menu_recipe_detail_app_bar"
-                app:titleTextAppearance="@style/Theme.CraftsmanBartender.ToolbarTextAppearance"
-                app:title="@{viewModel.recipeBasic.name, default=`Recipe Name`}"/>
+                app:menu="@menu/menu_recipe_detail_app_bar">
+
+                <TextView
+                    android:id="@+id/tv_title_recipe_name"
+                    style="@style/Theme.CraftsmanBartender.ToolbarTextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.currentRecipeWithIngredient.basic.name, default=`Recipe Name`}"/>
+
+            </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -58,7 +67,7 @@
                     style="@style/Theme.CraftsmanBartender.RecipeDetailTextAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.recipeBasic.combineMakingStylesToString(), default=`Making Style Undefined`}"
+                    android:text="@{viewModel.currentRecipeWithIngredient.basic.combineMakingStylesToString(), default=`Making Style Undefined`}"
                     app:layout_constraintTop_toBottomOf="@id/tv_header_making_style"/>
 
                 <TextView
@@ -74,7 +83,7 @@
                     style="@style/Theme.CraftsmanBartender.RecipeDetailTextAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.recipeBasic.glass, default=`Glass Undefined`}"
+                    android:text="@{viewModel.currentRecipeWithIngredient.basic.glass, default=`Glass Undefined`}"
                     app:layout_constraintTop_toBottomOf="@id/tv_header_glass"/>
 
                 <TextView
@@ -90,7 +99,7 @@
                     style="@style/Theme.CraftsmanBartender.RecipeDetailTextAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.recipeBasic.garnish, default=`None`}"
+                    android:text="@{viewModel.currentRecipeWithIngredient.basic.garnish, default=`None`}"
                     app:layout_constraintTop_toBottomOf="@id/tv_header_garnish"/>
 
                 <TextView
@@ -119,7 +128,7 @@
                     android:text="@string/string_apply_to_mock_test"
                     android:textSize="15sp"
                     android:fontFamily="@font/spoqa_han_sans_bold"
-                    android:checked="@{viewModel.recipeBasic.applyMockTest}"
+                    android:checked="@{viewModel.currentRecipeWithIngredient.basic.applyMockTest}"
                     app:layout_constraintTop_toBottomOf="@id/recycler_recipe_ingredients"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

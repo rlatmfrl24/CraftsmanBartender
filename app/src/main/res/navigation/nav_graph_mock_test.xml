@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_count_down">
         <action
             android:id="@+id/action_countDownFragment_to_mockTestFragment"
-            app:destination="@id/mockTestFragment"/>
+            app:destination="@id/mockTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/mockTestFragment"
